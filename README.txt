@@ -1,0 +1,3 @@
+Este es un proyecto para mostrar la busqueda de numeros primos de mersenne, dicha busqueda es de forma recreativa y apasionada, buscando mostrar tecnicas y algoritmos de programacion implementados en distintos codigos, con tal de mostrar la efectidad y capacidad de estos para los distintos computos. para que sirven los numeros primos de mersenne(y cualquier otro numero primo)?
+matematicamente: cualquier numero compuesto es creado a partir de numeros primos. es decir el conjunto de numeros primos es conjunto generador de los numeros naturales.
+informatica: los numeros primos (especialmente los grandes) permiten realizar criptografias seguras, ejemplo de ello es el sistema RSA.
