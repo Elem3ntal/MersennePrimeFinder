@@ -10,13 +10,12 @@ struct binaryChain{
 //Functions
 binaryChain* crearCadena(){
 	binaryChain *nuevo = new binaryChain;
-	nuevo->value = true;
+	nuevo->value = false;
 	nuevo->next = NULL;
 	nuevo->prev = NULL;
-	binaryChain *eslabon = new binaryChain;
-	eslabon->value = true;
-	nuevo->next = eslabon;
-	eslabon->prev = eslabon;
-	eslabon->next = NULL;
 	return nuevo;
+}
+binaryChain *sumaCadena(binaryChain *a, binaryChain*b){
+	binaryChain *salida;
+	return salida;
 }
