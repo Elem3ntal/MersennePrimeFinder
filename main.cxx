@@ -27,9 +27,11 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	binaryChain cadena1;
-	cadena1.value = true;
-	cout << cadena1.value << "." << endl;
+	binaryChain *cadena1 = crearCadena();
+	cout << cadena1->value << "." << endl;
+	cout << cadena1->next << "." << endl;
+	cout << cadena1->next->value << "." << endl;
+	cout << cadena1->prev << "." << endl;
 	return 0;
 }
 
