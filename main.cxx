@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 {
 	binaryChain *chain1 = createChain(5);
 	binaryChain *chain2 = createChain(false);
+	binaryChain *chain3 = createChain(true);
 	for(int i=0;i<16;i++){
 		cout << i << ") ";
 		printBinaryChain(chain1);
@@ -38,6 +39,10 @@ int main(int argc, char **argv)
 		cout << i << ") ";
 		printBinaryChain(chain2);
 		plusOne(chain2);
+	}
+	for(int i=0;i<10;i++){
+		printBinaryChain(chain3);
+		addToTheRight(chain3,true);
 	}
 	return 0;
 }

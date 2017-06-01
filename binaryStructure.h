@@ -15,11 +15,33 @@ void checkSpace(binaryChain *chain);
 binaryChain* createChain(bool _Value);
 binaryChain* createChain(int length);
 void printBinaryChain(binaryChain *toPrint);
+void addToTheLeft(binaryChain *chain, bool _value);
+void addToTheRight(binaryChain *chain, bool _value);
 
 ////////////////////Functions that are being made.////////////////////
-
+void addToTheLeft(binaryChain *chain, bool _value){
+	binaryLink *tempLink = chain->first;
+	if(tempLink->value){
+		binaryLink *newOne = new binaryLink;
+		newOne->value=_value;
+		newOne->next = NULL;
+		newOne->prev = tempLink;
+		tempLink->next = newOne;
+		chain->first = newOne;
+	}
+}
+void addToTheRight(binaryChain *chain, bool _value){
+	binaryLink *tempLink = chain->last;
+	if(tempLink->value){
+		binaryLink *newOne = new binaryLink;
+		newOne->value=_value;
+		newOne->next = tempLink;
+		newOne->prev = NULL;
+		tempLink->prev = newOne;
+		chain->last = newOne;
+	}
+}
 ////////////////////Functions  already  performed.////////////////////
-
 binaryChain* createChain(int length){ //create a new chain with a preset value
 	binaryChain *newChain = new binaryChain;
 	binaryLink *newLink = new binaryLink;
@@ -82,7 +104,7 @@ binaryChain* createChain(bool _Value){ //create a new chain with a preset value
 	return newChain;
 }
 void printBinaryChain(binaryChain *toPrint){ //just print... dah!
-	checkSpace(toPrint);
+	//checkSpace(toPrint);
 	binaryLink *temp=toPrint->first;
 	while(temp!=NULL){
 		cout << temp->value;
