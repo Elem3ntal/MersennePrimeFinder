@@ -24,8 +24,31 @@
          <p>Credits to: Javier Rodríguez B. / Elem3ntal Development</p>
          <a class="btn btn-default" href="http://elem3ntaldmnt.com/">My WebSite</a>
          <a class="btn btn-default" href="https://github.com/Elem3ntal" target="_blank">My GitHub</a>
+         <a class="btn btn-default" href="https://github.com/Elem3ntal" target="_blank">Repo of this project</a>
       </div>
       <div id="log">
+         <div>
+            <p id=date>Date: 2017-06-01</p>
+            <p>added two more functions in the repo, that allows to add a binary state (bool true/false) to the extremes of a chain, why this function is necessary? allows to create more faster a mersenne number.(and then evaluate if is prime)</p>
+            <div id="divTable">
+               <table>
+                  <tbody>
+                     <tr>
+                        <th>Number</th>
+                        <th>Binary</th>
+                     </tr>
+                     <tr><td>1</td><td>0000001</td></tr>
+                     <tr><td>3</td><td>0000011</td></tr>
+                     <tr><td>7</td><td>0000111</td></tr>
+                     <tr><td>15</td><td>0001111</td></tr>
+                     <tr><td>31</td><td>0011111</td></tr>
+                     <tr><td>63</td><td>0111111</td></tr>
+                     <tr><td>127</td><td>1111111</td></tr>
+                  </tbody>
+               </table>
+            </div>
+            <p>in order to generate the 127 form a decimal base, is necessary calculate 2 ^ 7 - 1 (an exponential calculation) or realize a "for" cycle multiplying for 2 each lap. in bigger numbers this could be really slow process.<br>To generate 127 in binary form, i just need to add seven 1 (seven true boolean states) side to side(preferely from left to right).</p>
+         </div>
          <div>
             <p id="date"><i>Date: 2017-05-31</i></p>
             <p>by the moment, the function to create and add "plus one" already been made, to do all the rest of operation. and by the moment nothing of the algorithm of search.</p>
@@ -51,6 +74,8 @@
             <hr>
             <p>A diagram to see this code could be: </p>
             <img src="Structure.png" width="400" height=auto>
+            <p>This two way link allows me to move around the chain without use recursive functions (with long long recursive functions the system is compromised). <br>
+               So, to print, just move from left to right. to add one number or sum, i move from right to left.</p>
          </div>
       </div>
    </body>
