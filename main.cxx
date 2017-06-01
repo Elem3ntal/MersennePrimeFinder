@@ -22,16 +22,23 @@
  */
 
 #include <iostream>
+#include <string.h>
 #include "binaryStructure.h"
-using namespace std;
 
 int main(int argc, char **argv)
 {
-	binaryChain *cadena1 = crearCadena();
-	cout << cadena1->value << "." << endl;
-	cout << cadena1->next << "." << endl;
-	cout << cadena1->next->value << "." << endl;
-	cout << cadena1->prev << "." << endl;
+	binaryChain *chain1 = createChain(5);
+	binaryChain *chain2 = createChain(false);
+	for(int i=0;i<16;i++){
+		cout << i << ") ";
+		printBinaryChain(chain1);
+		plusOne(chain1);
+	}
+	for(int i=0;i<16;i++){
+		cout << i << ") ";
+		printBinaryChain(chain2);
+		plusOne(chain2);
+	}
 	return 0;
 }
 

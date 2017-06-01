@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
+
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="index.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    </head>
+
    <body>
       <header>
          <title>Mersenne Prime Finder</title>
@@ -15,11 +18,41 @@
       <div id="main">
          <p>In the search of Mersenne prime numbers we need to work with big amount of data, those are big numbers! those prime numbers are made with the formula (2^n)-1, and in the informatic world the limit of a integer value es 2.147.483.647 (wich is the 8° mersenne's prime), so, we can't use regular variables, thus we can't use integer or float variables.</p>
          <p>It will be created a structure binary (are faster in big computations) to adapt is grow in dynamic form, and also create is basic operations add, rest, multiplication, division, power and module; and finally a conversor from this tipe of binary data to decimal data.</p>
+         <p><i>this web site will be write like a blog, from down(latest) to up(newest), so, time in time, i can read thoughts and ideas that i have from this.</i></p>
       </div>
       <div id="footer">
          <p>Credits to: Javier Rodríguez B. / Elem3ntal Development</p>
          <a class="btn btn-default" href="http://elem3ntaldmnt.com/">My WebSite</a>
          <a class="btn btn-default" href="https://github.com/Elem3ntal" target="_blank">My GitHub</a>
       </div>
+      <div id="log">
+         <div>
+            <p id="date"><i>Date: 2017-05-31</i></p>
+            <p>by the moment, the function to create and add "plus one" already been made, to do all the rest of operation. and by the moment nothing of the algorithm of search.</p>
+            <div id="divTable">
+               <table>
+                  <tbody>
+                     <tr>
+                        <th>code</th>
+                     </tr>
+                     <tr><td>using namespace std;</td></tr>
+                     <tr><td>struct binaryLink{</td></tr>
+                     <tr><td><tab1>bool value;</tab1></td></tr>
+                     <tr><td><tab1>binaryLink *next; // to the left,</tab1></td></tr>
+                     <tr><td><tab1>binaryLink *prev; // to the right;</tab1></td></tr>
+                     <tr><td>};</td></tr>
+                     <tr><td>struct binaryChain{</td></tr>
+                     <tr><td><tab1>binaryLink *first; //to the left!</tab1></td></tr>
+                     <tr><td><tab1>binaryLink *last; // to the right!</tab1></td></tr>
+                     <tr><td>};</td></tr>
+                  </tbody>
+               </table>
+            </div>
+            <hr>
+            <p>A diagram to see this code could be: </p>
+            <img src="Structure.png" width="400" height=auto>
+         </div>
+      </div>
    </body>
+
 </html>
