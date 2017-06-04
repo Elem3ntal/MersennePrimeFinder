@@ -27,15 +27,6 @@ div:not(#log):not(#divTable) {
     border: 3px solid #CCCCCC;
     left: 100px;
 }
-#divTable{
-  width: 50%;
-  margin: 0 auto;
-}
-#divTableCode{
-  width: 100%;
-  margin: 0 auto;
-}
-
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
@@ -55,6 +46,18 @@ tab2 {
 
 tab3 {
     padding-left: 6em;
+}
+
+tab4 {
+    padding-left: 8em;
+}
+
+tab5 {
+    padding-left: 10em;
+}
+
+tab6 {
+    padding-left: 12em;
 }
 
 #date {

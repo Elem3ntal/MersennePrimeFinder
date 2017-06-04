@@ -32,32 +32,73 @@
          <div>
             <p id=date>Date: 2017-06-04 (in the evening)</p>
             <p>Basic Operation! for the moment can do binary sums, how this help for the finder? if exist a number P, that increment in 2 in 2(determinate in the latter post), like 3, 5, 7, 9, 11, is simple, create a binary "10" and add over and over again, this help to generate the posible divisors of the Mersenne Number. <br> a little of theory, for a binary sum, you have to consider 3 elements, the two elements to sum and a carry element (for the previous element). with this simple rule.</p>
-         </div>
-         <div id="divTable">
-            <table style="width:70%">
-               <tbody>
-
+            <div id="divTable" align="center">
+               <table style="width:20%">
+                  <tbody>
                      <th colspan='4'>With: A+B=R (C for carry)</th>
-                  <tr>
-                     <th>A</th><th>B</th><th>R</th><th>C</th>
-                  </tr>
-                  <tr>
-                     <td>1</td><td>1</td><td>0</td><td>1</td>
-                  </tr>
-                  <tr>
-                     <td>1</td><td>0</td><td>1</td><td>0</td>
-                  </tr>
-                  <tr>
-                     <td>0</td><td>1</td><td>1</td><td>0</td>
-                  </tr>
-                  <tr>
-                     <td>0</td><td>0</td><td>0</td><td>0</td>
-                  </tr>
-               </tbody>
-            </table>
-            <p> in code, this "algorithm" is: (al least, my interpretation, with, obvious, the structure that i work, is in the repo and in the first post)</p>
+                     <tr>
+                        <th>A</th><th>B</th><th>R</th><th>C</th>
+                     </tr>
+                     <tr>
+                        <td>1</td><td>1</td><td>0</td><td>1</td>
+                     </tr>
+                     <tr>
+                        <td>1</td><td>0</td><td>1</td><td>0</td>
+                     </tr>
+                     <tr>
+                        <td>0</td><td>1</td><td>1</td><td>0</td>
+                     </tr>
+                     <tr>
+                        <td>0</td><td>0</td><td>0</td><td>0</td>
+                     </tr>
+                  </tbody>
+               </table>
+               <p> in code, this "algorithm" is: (al least, my interpretation, with, obvious, the structure that i work, is in the repo and in the first post)</p>
+            </div>
+            <div id="divTable" align="center">
+               <table style="width:80%">
+                  <tbody>
+                     <th colspan='2'>Code:</th>
+                     <tr><td>2</td><td>//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter</td></tr>
+                     <tr><td>1</td><td>void addBinaryChain(binaryChain *target, binaryChain *toSum){</td></tr>
+                     <tr><td>3</td><td><tab1>binaryLink *a = target->last, *b = toSum->last;</tab1></td></tr>
+                     <tr><td>4</td><td><tab1>bool carry = false; //true and true is false, and carry true to the nex one, 1+1=10</tab1></td></tr>
+                     <tr><td>5</td><td><tab1>while((a!=NULL || b!=NULL) || carry){</tab1></td></tr>
+                     <tr><td>6</td><td><tab2>if(carry){//Two cases possible with carry, the link where the sum goes exists or does not</tab2></td></tr>
+                     <tr><td>7</td><td><tab3>if(a!=NULL){ //if A exist, are two posibilites, A have a False or True</tab3></td></tr>
+                     <tr><td>8</td><td><tab4>if(a->value)</tab4></td></tr>
+                     <tr><td>9</td><td><tab5>a->value=false;</tab5></td></tr>
+                     <tr><td>10</td><td><tab4>else{</tab4></td></tr>
+                     <tr><td>11</td><td><tab5>a->value=true;</tab5></td></tr>
+                     <tr><td>12</td><td><tab5>carry=false;</tab5></td></tr>
+                     <tr><td>13</td><td><tab4>}</tab4></td></tr>
+                     <tr><td>14</td><td><tab3>}</tab3></td></tr>
+                     <tr><td>15</td><td><tab3>else{ // comes here if a not exist and whe have a carry.</tab3></td></tr>
+                     <tr><td>16</td><td><tab4>addToTheLeft(target,true);</tab4></td></tr>
+                     <tr><td>17</td><td><tab4>carry=false;</tab4></td></tr>
+                     <tr><td>18</td><td><tab3>}</tab3></td></tr>
+                     <tr><td>19</td><td><tab2>}</tab2></td></tr>
+                     <tr><td>20</td><td><tab2>if(b!=NULL && a!=NULL){</tab2></td></tr>
+                     <tr><td>21</td><td><tab3>if(a->value && b->value){</tab3></td></tr>
+                     <tr><td>22</td><td><tab4>a->value = false;</tab4></td></tr>
+                     <tr><td>23</td><td><tab4>carry = true;</tab4></td></tr>
+                     <tr><td>24</td><td><tab3>}</tab3></td></tr>
+                     <tr><td>25</td><td><tab3>else if(a->value || b->value){</tab3></td></tr>
+                     <tr><td>26</td><td><tab4>a->value = true;</tab4></td></tr>
+                     <tr><td>27</td><td><tab3>}</tab3></td></tr>
+                     <tr><td>28</td><td><tab2>}</tab2></td></tr>
+                     <tr><td>29</td><td><tab2>if(a!=NULL)</tab2></td></tr>
+                     <tr><td>30</td><td><tab3>a=a->next;</tab3></td></tr>
+                     <tr><td>31</td><td><tab2>if(b!=NULL)</tab2></td></tr>
+                     <tr><td>32</td><td><tab3>b=b->next;</tab3></td></tr>
+                     <tr><td>33</td><td><tab1>}</tab1></td></tr>
+                     <tr><td>34</td><td>}</td></tr>
+                  </tbody>
+               </table>
+            </div>
+            <br>
          </div>
-<!--         -->
+         <!--         -->
          <div>
             <p id=date>Date: 2017-06-04</p>
             <p>Ok, since the last entrance, we have the ability to generate the number to analyze; but we need the ability to generate the possible divisors of that number.
@@ -81,8 +122,9 @@
          <div>
             <p id=date>Date: 2017-06-01</p>
             <p>added two more functions in the repo, that allows to add a binary state (bool true/false) to the extremes of a chain, why this function is necessary? allows to create more faster a mersenne number.(and then evaluate if is prime)</p>
-            <div id="divTable">
-               <table>
+
+            <div id="divTable" align="center">
+               <table style="width:15%">
                   <tbody>
                      <tr>
                         <th>Number</th>
@@ -103,8 +145,9 @@
          <div>
             <p id="date"><i>Date: 2017-05-31</i></p>
             <p>by the moment, the function to create and add "plus one" already been made, to do all the rest of operation. and by the moment nothing of the algorithm of search.</p>
-            <div id="divTable">
-               <table>
+
+            <div id="divTable" align="center">
+               <table style="width:25%">
                   <tbody>
                      <tr>
                         <th>code</th>
