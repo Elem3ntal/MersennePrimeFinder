@@ -27,11 +27,18 @@
 
 int main(int argc, char **argv)
 {
-	binaryChain *chain = createChain(true);
-	for(int i=0;i<74207281;i++){
-		addToTheRight(chain,true);
+	binaryChain *chainA = createChain(true);
+	binaryChain *chainB = createChain(true);
+	for(int i=0;i<9;i++){
+		plusOne(chainA);
 	}
-	printBinaryChain(chain);
+	for(int i=0;i<6;i++){
+		plusOne(chainB);
+	}
+	printBinaryChain(chainA);
+	printBinaryChain(chainB);
+	addBinaryChain(chainB,chainA);
+	printBinaryChain(chainB);
 	return 0;
 }
 

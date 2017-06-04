@@ -28,7 +28,11 @@ div:not(#log):not(#divTable) {
     left: 100px;
 }
 #divTable{
-  width: 30%;
+  width: 50%;
+  margin: 0 auto;
+}
+#divTableCode{
+  width: 100%;
   margin: 0 auto;
 }
 

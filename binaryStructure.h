@@ -17,31 +17,61 @@ binaryChain* createChain(int length);
 void printBinaryChain(binaryChain *toPrint);
 void addToTheLeft(binaryChain *chain, bool _value);
 void addToTheRight(binaryChain *chain, bool _value);
+void addBinaryChain(binaryChain *target, binaryChain *toSum);
 
 ////////////////////Functions that are being made.////////////////////
-
 ////////////////////Functions  already  performed.////////////////////
+void addBinaryChain(binaryChain *target, binaryChain *toSum){
+	//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter
+	binaryLink *a = target->last, *b = toSum->last;
+	bool carry = false; //true and true is false, and carry true to the nex one, 1+1=10
+	while((a!=NULL || b!=NULL) || carry){
+		if(carry){//Two cases possible with carry, the link where the sum goes exists or does not
+			if(a!=NULL){ //if A exist, are two posibilites, A have a False or True
+				if(a->value)
+					a->value=false;
+				else{
+					a->value=true;
+					carry=false;
+				}
+			}
+			else{ // comes here if a not exist and whe have a carry.
+				addToTheLeft(target,true);
+				carry=false;
+			}
+		}
+		if(b!=NULL && a!=NULL){
+			if(a->value && b->value){
+				a->value = false;
+				carry = true;
+			}
+			else if(a->value || b->value){
+				a->value = true;
+			}
+		}
+		if(a!=NULL)
+			a=a->next;
+		if(b!=NULL)
+			b=b->next;
+	}
+}
 void addToTheLeft(binaryChain *chain, bool _value){
 	binaryLink *tempLink = chain->first;
-	if(tempLink->value){
-		binaryLink *newOne = new binaryLink;
-		newOne->value=_value;
-		newOne->next = NULL;
-		newOne->prev = tempLink;
-		tempLink->next = newOne;
-		chain->first = newOne;
-	}
+	binaryLink *newOne = new binaryLink;
+	newOne->value=_value;
+	newOne->next = NULL;
+	newOne->prev = tempLink;
+	tempLink->next = newOne;
+	chain->first = newOne;
 }
 void addToTheRight(binaryChain *chain, bool _value){
 	binaryLink *tempLink = chain->last;
-	if(tempLink->value){
-		binaryLink *newOne = new binaryLink;
-		newOne->value=_value;
-		newOne->next = tempLink;
-		newOne->prev = NULL;
-		tempLink->prev = newOne;
-		chain->last = newOne;
-	}
+	binaryLink *newOne = new binaryLink;
+	newOne->value=_value;
+	newOne->next = tempLink;
+	newOne->prev = NULL;
+	tempLink->prev = newOne;
+	chain->last = newOne;
 }
 binaryChain* createChain(int length){ //create a new chain with a preset value
 	binaryChain *newChain = new binaryChain;
