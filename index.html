@@ -16,7 +16,7 @@
          <h2>Mersenne Prime Finder</h2>
       </header>
       <div id="main">
-         <p>In the search of Mersenne prime numbers we need to work with big amount of data, those are big numbers! those prime numbers are made with the formula (2^n)-1, and in the informatic world the limit of a integer value es 2.147.483.647 (wich is the 8° mersenne's prime), so, we can't use regular variables, thus we can't use integer or float variables.</p>
+         <p>In the search of Mersenne prime numbers we need to work with big amount of data, those are big numbers! those prime numbers are made with the formula (2<sup>n</sup>)-1, and in the informatic world the limit of a integer value es 2.147.483.647 (wich is the 8° mersenne's prime), so, we can't use regular variables, thus we can't use integer or float variables.</p>
          <p>It will be created a structure binary (are faster in big computations) to adapt is grow in dynamic form, and also create is basic operations add, rest, multiplication, division, power and module; and finally a conversor from this tipe of binary data to decimal data.</p>
          <p><i>this web site will be write like a blog, from down(latest) to up(newest), so, time in time, i can read thoughts and ideas that i have from this.</i></p>
       </div>
@@ -27,6 +27,28 @@
          <a class="btn btn-default" href="https://github.com/Elem3ntal" target="_blank">Repo of this project</a>
       </div>
       <div id="log">
+         <!--         -->
+         <!--         /-->
+         <div>
+            <p id=date>Date: 2017-06-04</p>
+            <p>Ok, since the last entrance, we have the ability to generate the number to analyze; but we need the ability to generate the possible divisors of that number.
+               A few considerations:<br>
+               As you can se, every mersenne number is odd (because is formula 2<sup>n</sup> - 1), implies, that every possible divisor has to be odd to (try to divide an odd number with a even number will always be inexact).<br>
+               so, in conclusion, we generate mersenne number with: 2<sup>n</sup> - 1 <br>
+               and analize with number generate with: 2m-1 with this number less than less than an one third of the number to analize. <br>
+               if P is the prime to analyze. from 3 to M the maximum number possible that could be divisor is: P/3.
+               so, from 3, going up 2 in 2 to M, is needed: <br>
+               2<sup>n</sup>-1=3(2m-1)<br>
+               2<sup>n</sup>-1=6m-3<br>
+               2<sup>n</sup>+2=6m<br>
+               m=(2<sup>n</sup>+2)/6<br>
+               in conclusion, why this was necessary? with this calculation, is possible to determine the amount of number than is necessary to try as divisor.
+               in a cicle of M times, testing from "i=2" to M, with the formula 2i-1, all that number is necesary to test as divisor.<br>
+               This amount is extremly far reduced than test all the posible numbers betwen 2 to P.<br>
+               the problem here (really thinking out loud), is calculate that formula in binary. Still remains to do the basic operations/functions in binary.<br>
+            </p>
+         </div>
+         <!--         -->
          <div>
             <p id=date>Date: 2017-06-01</p>
             <p>added two more functions in the repo, that allows to add a binary state (bool true/false) to the extremes of a chain, why this function is necessary? allows to create more faster a mersenne number.(and then evaluate if is prime)</p>
@@ -47,7 +69,7 @@
                   </tbody>
                </table>
             </div>
-            <p>in order to generate the 127 form a decimal base, is necessary calculate 2 ^ 7 - 1 (an exponential calculation) or realize a "for" cycle multiplying for 2 each lap. in bigger numbers this could be really slow process.<br>To generate 127 in binary form, i just need to add seven 1 (seven true boolean states) side to side(preferely from left to right).</p>
+            <p>in order to generate the 127 form a decimal base, is necessary calculate 2 <sup> 7</sup> - 1 (an exponential calculation) or realize a "for" cycle multiplying for 2 each lap. in bigger numbers this could be really slow process.<br>To generate 127 in binary form, i just need to add seven 1 (seven true boolean states) side to side(preferely from left to right).</p>
          </div>
          <div>
             <p id="date"><i>Date: 2017-05-31</i></p>

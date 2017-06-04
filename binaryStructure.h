@@ -19,6 +19,8 @@ void addToTheLeft(binaryChain *chain, bool _value);
 void addToTheRight(binaryChain *chain, bool _value);
 
 ////////////////////Functions that are being made.////////////////////
+
+////////////////////Functions  already  performed.////////////////////
 void addToTheLeft(binaryChain *chain, bool _value){
 	binaryLink *tempLink = chain->first;
 	if(tempLink->value){
@@ -41,7 +43,6 @@ void addToTheRight(binaryChain *chain, bool _value){
 		chain->last = newOne;
 	}
 }
-////////////////////Functions  already  performed.////////////////////
 binaryChain* createChain(int length){ //create a new chain with a preset value
 	binaryChain *newChain = new binaryChain;
 	binaryLink *newLink = new binaryLink;

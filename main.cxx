@@ -28,7 +28,7 @@
 int main(int argc, char **argv)
 {
 	binaryChain *chain = createChain(true);
-	for(int i=0;i<40;i++){
+	for(int i=0;i<74207281;i++){
 		addToTheRight(chain,true);
 	}
 	printBinaryChain(chain);
