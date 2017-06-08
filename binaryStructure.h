@@ -18,9 +18,50 @@ void printBinaryChain(binaryChain *toPrint);
 void addToTheLeft(binaryChain *chain, bool _value);
 void addToTheRight(binaryChain *chain, bool _value);
 void addBinaryChain(binaryChain *target, binaryChain *toSum);
+void subtractBinaryChain(binaryChain *target, binaryChain *toSub);
 
 ////////////////////Functions that are being made.////////////////////
+
 ////////////////////Functions  already  performed.////////////////////
+void subtractBinaryChain(binaryChain *target, binaryChain *toSub){
+	//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter
+	binaryLink *a = target->last, *b = toSub->last;
+	bool carry = false; //true and true is false, and carry true to the nex one, 1+1=10
+	while((a!=NULL && b!=NULL)){
+		if(carry){//Two cases possible with carry, the link where the sum goes exists or does not
+			if(a!=NULL){ //if A exist, are two posibilites, A have a False or True
+				if(a->value)
+					a->value=false;
+				else{
+					a->value=true;
+					carry=false;
+				}
+			}
+			else{ // comes here if a not exist and whe have a carry.
+				addToTheLeft(target,true);
+				carry=false;
+			}
+		}
+		if(b!=NULL && a!=NULL){
+			if(a->value && !b->value){
+				a->value = false;
+				carry = true;
+			}
+			else if(a->value || !b->value){
+				a->value = true;
+			}
+		}
+		if(a!=NULL)
+			a=a->next;
+		if(b->next==NULL)
+			addToTheLeft(toSub,false);
+		if(b!=NULL)
+			b=b->next;
+	}
+	//drop the first one
+	target->first=target->first->prev;
+	plusOne(target);
+}
 void addBinaryChain(binaryChain *target, binaryChain *toSum){
 	//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter
 	binaryLink *a = target->last, *b = toSum->last;

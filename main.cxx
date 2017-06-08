@@ -29,16 +29,19 @@ int main(int argc, char **argv)
 {
 	binaryChain *chainA = createChain(true);
 	binaryChain *chainB = createChain(true);
-	for(int i=0;i<9;i++){
+	for(int i=0;i<122;i++){
 		plusOne(chainA);
 	}
-	for(int i=0;i<6;i++){
+	for(int i=0;i<2;i++){
 		plusOne(chainB);
 	}
-	printBinaryChain(chainA);
-	printBinaryChain(chainB);
-	addBinaryChain(chainB,chainA);
-	printBinaryChain(chainB);
+	printBinaryChain(chainA); //123
+	printBinaryChain(chainB); // 16
+	//addBinaryChain(chainA,chainB);
+	for(int i=0;i<50;i++){
+		subtractBinaryChain(chainA,chainB);
+		printBinaryChain(chainA);
+	}
 	return 0;
 }
 
