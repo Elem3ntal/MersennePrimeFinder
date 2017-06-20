@@ -19,9 +19,29 @@ void addToTheLeft(binaryChain *chain, bool _value);
 void addToTheRight(binaryChain *chain, bool _value);
 void addBinaryChain(binaryChain *target, binaryChain *toSum);
 void subtractBinaryChain(binaryChain *target, binaryChain *toSub);
-
+bool isAmayor(binaryChain *A, binaryChain *B);
 ////////////////////Functions that are being made.////////////////////
-
+bool isAmayor(binaryChain *A, binaryChain *B){
+	binaryLink *targetA = A->last, *targetB = B->last;
+	bool aMayor = true;
+	while(targetA!=NULL && targetB!=NULL){
+		if(targetA->value==targetB->value){
+		}
+		else if(targetB->value==false && targetA->value==true){
+			aMayor = true;
+		}
+		else
+			aMayor = false;
+		targetA = targetA->next;
+		targetB = targetB->next;
+	}
+	cout << "bool state: "<< aMayor << endl;
+	if(targetA!=NULL){
+		if(targetA->value==true && targetB==NULL)
+			aMayor = true;
+	}
+	return aMayor;
+}
 ////////////////////Functions  already  performed.////////////////////
 void subtractBinaryChain(binaryChain *target, binaryChain *toSub){
 	//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter
