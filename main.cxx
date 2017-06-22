@@ -27,19 +27,34 @@
 
 int main(int argc, char **argv)
 {
+	//number to analize
 	binaryChain *chainA = createChain(true);
 	binaryChain *chainB = createChain(true);
-	for(int i=0;i<21;i++){
-		plusOne(chainA);
-	}
-	for(int i=0;i<20;i++){
+	binaryChain *two1 = createChain(true);
+	binaryChain *two2 = createChain(true);
+	for(int i=0;i<2;i++){ //to create the number 3
 		plusOne(chainB);
 	}
+	addToTheRight(two1,false);//to create the number two,
+	addToTheRight(two2,false);//to create the number two,
+	for(int i=0;i<6;i++){ //create the big chain A
+		addToTheRight(chainA,true);
+	}
+	addToTheLeft(chainA,false);
 	printBinaryChain(chainA); //123
 	printBinaryChain(chainB); // 16
-	//addBinaryChain(chainA,chainB);
-	if (isAmayor(chainA,chainB))
-		cout << "A is mayor\n";
+	printBinaryChain(two1); // 16
+	cout << "----------\n";
+	while(isAmayor(chainA,chainB)){
+		printBinaryChain(chainA);
+		subtractBinaryChain(chainA,chainB);
+		//printBinaryChain(chainB); // 16
+	}
+	cout << "----------\n";
+	printBinaryChain(chainA);
+	subtractBinaryChain(chainA,chainB);
+	printBinaryChain(chainA); //123
+	printBinaryChain(chainB); // 16
 	return 0;
 }
 
