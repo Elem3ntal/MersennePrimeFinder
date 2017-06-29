@@ -16,9 +16,9 @@
          <h2>Mersenne Prime Finder</h2>
       </header>
       <div id="main">
-         <p>In the search of Mersenne prime numbers we need to work with big amount of data, those are big numbers! those prime numbers are made with the formula (2<sup>n</sup>)-1, and in the informatic world the limit of a integer value es 2.147.483.647 (wich is the 8° mersenne's prime), so, we can't use regular variables, thus we can't use integer or float variables.</p>
-         <p>It will be created a structure binary (are faster in big computations) to adapt is grow in dynamic form, and also create is basic operations add, rest, multiplication, division, power and module; and finally a conversor from this tipe of binary data to decimal data.</p>
-         <p><i>this web site will be write like a blog, from down(latest) to up(newest), so, time in time, i can read thoughts and ideas that i have from this.</i></p>
+         <p class="textJ">In the search of Mersenne prime numbers we need to work with big amount of data, those are big numbers! those prime numbers are made with the formula (2<sup>n</sup>)-1, and in the informatic world the limit of a integer value es 2.147.483.647 (wich is the 8° mersenne's prime), so, we can't use regular variables, thus we can't use integer or float variables.</p>
+         <p class="textJ">It will be created a structure binary (are faster in big computations) to adapt is grow in dynamic form, and also create is basic operations add, rest, multiplication, division, power and module; and finally a conversor from this tipe of binary data to decimal data.</p>
+         <p class="textJ"><i>this web site will be write like a blog, from down(latest) to up(newest), so, time in time, i can read thoughts and ideas that i have from this.</i></p>
       </div>
       <div id="footer">
          <p>Credits to: Javier Rodríguez B. / Elem3ntal Development</p>
@@ -28,10 +28,41 @@
       </div>
       <div id="log">
          <!--         -->
-         <!--         /-->
+         <div>
+            <p id=date>Date: 2017-06-29</p>
+            <p class="textJ">Because a lot of work i couldn't sit to make a breakthrough, but here we are! the algorith works with 4 numbers:</p>
+            <p class="textJ">how this works, take the number and a divisor, and starts to subtract this "divisor" from the number while the result of this operation be greater than the divisor. when this condition is broken means two things, or:<br>we reach the same number as the divisor. Thus, the number is multiple of the divisor, then isn't prime.<br>The result of the subtraction is less than the divisor. implies that the number isn't generated with this divisor, and is necessary to test with another. IF all the possible numbers is tested (from divisor to maxDivisory, see the table below) and all result is the same (the substract is less than divisor), the number is prime.
+            </p>
+            <br>
+            <div id="divTable" align="center">
+               <table style="width:90%">
+                  <tbody>
+                     <tr>
+                        <th>Name</th><th>Example</th><th>Use</th>
+                     </tr>
+                     <tr>
+                        <td>Target</td><td>1 111 111 (127)</td><td>this is the number to analyze, we have to determine if is prime or not.</td>
+                     </tr>
+                     <tr>
+                        <td>MaxDivisory</td><td>111 111 (63)</td><td>from the previous post, is determined that the maximum divisor is at last a third of the number, but! by the moment, only can be generate a "half" easily by removing a "1". so, 127 the max divisory is 63, for 7 have 3, 31 to 63</td>
+                     </tr>
+                     <tr>
+                        <td>divisor</td><td>11 (3)</td><td>we only work with odd numbers, so, starts from 3 increasing up to the max divisor.</td>
+                     </tr>
+                     <tr>
+                        <td>two</td><td>10 (2)</td><td>to increase the divisor from odd to odd, is necessary to "jump" a even, so, increase from 2 to 2.</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <br>
+            <p class="textJ"> A few considerations: <br>for the number 127, starting from 3, we have to test 31 possible divisors (increasing 2 to 2 to get 63), but none number that finish in 5 can be a prime (in decimal base is easily detectable), but by the moment the algorithm can't determinate a number finished in 5. so from this 31 possibilities, 6 finished in 5, and 10 are multiples of 3, so, from 31 number at least 16 test are a waste of time.<br>The nexts advances will be focused in increase the efficiency. so, reduce the list of possible numbers to analyse. (less numbers, better times)</p>
+            <p class="textJ">by the moment, the code in the repo, only can calculate up to 2^28, i don't know why but eats a lot of ram!!, if don't put the algorithm to work i can generate even bigger numbers (thousands of "1"), <b>but by the moment i can't figure out the problem.</b></p>
+         </div>
+         <!--         -->
          <div>
             <p id=date>Date: 2017-06-04 (in the evening)</p>
-            <p>Basic Operation! for the moment can do binary sums, how this help for the finder? if exist a number P, that increment in 2 in 2(determinate in the latter post), like 3, 5, 7, 9, 11, is simple, create a binary "10" and add over and over again, this help to generate the posible divisors of the Mersenne Number. <br> a little of theory, for a binary sum, you have to consider 3 elements, the two elements to sum and a carry element (for the previous element). with this simple rule.</p>
+            <p class="textJ">Basic Operation! for the moment can do binary sums, how this help for the finder? if exist a number P, that increment in 2 in 2(determinate in the latter post), like 3, 5, 7, 9, 11, is simple, create a binary "10" and add over and over again, this help to generate the posible divisors of the Mersenne Number. <br> a little of theory, for a binary sum, you have to consider 3 elements, the two elements to sum and a carry element (for the previous element). with this simple rule.</p>
             <div id="divTable" align="center">
                <table style="width:20%">
                   <tbody>
@@ -101,17 +132,20 @@
          <!--         -->
          <div>
             <p id=date>Date: 2017-06-04</p>
-            <p>Ok, since the last entrance, we have the ability to generate the number to analyze; but we need the ability to generate the possible divisors of that number.
+            <p class="textJ">Ok, since the last entrance, we have the ability to generate the number to analyze; but we need the ability to generate the possible divisors of that number.
                A few considerations:<br>
                As you can se, every mersenne number is odd (because is formula 2<sup>n</sup> - 1), implies, that every possible divisor has to be odd to (try to divide an odd number with a even number will always be inexact).<br>
                so, in conclusion, we generate mersenne number with: 2<sup>n</sup> - 1 <br>
                and analize with number generate with: 2m-1 with this number less than less than an one third of the number to analize. <br>
                if P is the prime to analyze. from 3 to M the maximum number possible that could be divisor is: P/3.
-               so, from 3, going up 2 in 2 to M, is needed: <br>
+               so, from 3, going up 2 in 2 to M, is needed:</p>
+            <p>
                2<sup>n</sup>-1=3(2m-1)<br>
                2<sup>n</sup>-1=6m-3<br>
                2<sup>n</sup>+2=6m<br>
                m=(2<sup>n</sup>+2)/6<br>
+            </p>
+            <p class="textJ">
                in conclusion, why this was necessary? with this calculation, is possible to determine the amount of number than is necessary to try as divisor.
                in a cicle of M times, testing from "i=2" to M, with the formula 2i-1, all that number is necesary to test as divisor.<br>
                This amount is extremly far reduced than test all the posible numbers betwen 2 to P.<br>
@@ -121,7 +155,7 @@
          <!--         -->
          <div>
             <p id=date>Date: 2017-06-01</p>
-            <p>added two more functions in the repo, that allows to add a binary state (bool true/false) to the extremes of a chain, why this function is necessary? allows to create more faster a mersenne number.(and then evaluate if is prime)</p>
+            <p class="textJ">added two more functions in the repo, that allows to add a binary state (bool true/false) to the extremes of a chain, why this function is necessary? allows to create more faster a mersenne number.(and then evaluate if is prime)</p>
 
             <div id="divTable" align="center">
                <table style="width:15%">
@@ -140,11 +174,12 @@
                   </tbody>
                </table>
             </div>
-            <p>in order to generate the 127 form a decimal base, is necessary calculate 2 <sup> 7</sup> - 1 (an exponential calculation) or realize a "for" cycle multiplying for 2 each lap. in bigger numbers this could be really slow process.<br>To generate 127 in binary form, i just need to add seven 1 (seven true boolean states) side to side(preferely from left to right).</p>
+            <p class="textJ">in order to generate the 127 form a decimal base, is necessary calculate 2 <sup> 7</sup> - 1 (an exponential calculation) or realize a "for" cycle multiplying for 2 each lap. in bigger numbers this could be really slow process.<br>To generate 127 in binary form, i just need to add seven 1 (seven true boolean states) side to side(preferely from left to right).</p>
          </div>
+         <!--         -->
          <div>
             <p id="date"><i>Date: 2017-05-31</i></p>
-            <p>by the moment, the function to create and add "plus one" already been made, to do all the rest of operation. and by the moment nothing of the algorithm of search.</p>
+            <p class="textJ">by the moment, the function to create and add "plus one" already been made, to do all the rest of operation. and by the moment nothing of the algorithm of search.</p>
 
             <div id="divTable" align="center">
                <table style="width:25%">

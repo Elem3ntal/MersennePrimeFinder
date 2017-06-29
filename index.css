@@ -32,6 +32,7 @@ td, th {
     text-align: left;
 }
 
+
 tr:nth-child(even) {
     background-color: #dddddd;
 }
@@ -67,4 +68,9 @@ tab6 {
 #log {
    align-content: center;
     text-align: center;
+}
+
+.textJ {
+    padding: 10px;
+    text-align : justify;
 }
