@@ -27,23 +27,60 @@
 
 int main(int argc, char **argv)
 {
-	//number to analize
-	binaryChain *chainA = createChain(true);
-	binaryChain *chainB = createChain(true);
-	binaryChain *two1 = createChain(true);
-	binaryChain *two2 = createChain(true);
-	for(int i=0;i<2;i++){ //to create the number 3
-		plusOne(chainB);
+	int N=31; //amount of "1" to conform the binary
+	bool flag = false;
+	binaryChain *maxDivisory = createChain(true);
+	binaryChain *divisor = createChain(true);
+	binaryChain *two = createChain(true);
+	//every number has to had a cero in the left
+	addToTheLeft(maxDivisory,false);
+	addToTheLeft(divisor,false);
+	addToTheLeft(two,false);
+	//cycles for to create the two, divisor and maxDivisor
+	addToTheRight(two,false);//to create the number two
+	addToTheRight(divisor,true);//to create first divisor
+	for(int i=0;i<N-2;i++){ //to create max divisor
+		addToTheRight(maxDivisory,true);
 	}
-	addToTheRight(two1,false);//to create the number two,
-	addToTheRight(two2,false);//to create the number two,
-	for(int i=0;i<6;i++){ //create the big chain A
-		addToTheRight(chainA,true);
-	}
+	while (!isAmayor(divisor,maxDivisory)){
+		binaryChain *Target = createChain(true);
+		addToTheLeft(Target,false);
+		for(int i=0;i<N-1;i++){
+			addToTheRight(Target,true);
+		}
+		while(!isAmayor(divisor,Target) && !isEqual(divisor,Target)){
+			//printBinaryChain(Target);
+			subtractBinaryChain(Target,divisor);
+		}
+		flag=isEqual(Target,divisor);
+		deleteChain(Target);
+		delete Target;
+		if(flag){
+			cout << "The number isn't pryme\n";
+			break;
+		}
+		//int a;
+		//cin>>a;
+		//printBinaryChain(Target);
+		//printBinaryChain(maxDivisory);
+		//printBinaryChain(divisor);
+		addBinaryChain(divisor,two);
+		//cout << "---------\n";
+	}/*
+		printBinaryChain(maxDivisory);
+		printBinaryChain(divisor);
+		addBinaryChain(divisor,two);*/
+		cout << "---------\n";
+	if(!flag)
+		cout<<"the number is pryme\n";
+	/*
+	//always before operate add a false to the left.
+	addBinaryChain(chainA,two1);
 	addToTheLeft(chainA,false);
+	addToTheLeft(chainB,false);
 	printBinaryChain(chainA); //123
 	printBinaryChain(chainB); // 16
-	printBinaryChain(two1); // 16
+	printBinaryChain(two1); // 2
 	cout << "----------\n";
 	while(isAmayor(chainA,chainB)){
 		printBinaryChain(chainA);
@@ -55,6 +92,8 @@ int main(int argc, char **argv)
 	subtractBinaryChain(chainA,chainB);
 	printBinaryChain(chainA); //123
 	printBinaryChain(chainB); // 16
+	cout << "---------\n";
+	cout << isEqual(chainA,chainB);*/
 	return 0;
 }
 

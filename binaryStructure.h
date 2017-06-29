@@ -20,9 +20,42 @@ void addToTheRight(binaryChain *chain, bool _value);
 void addBinaryChain(binaryChain *target, binaryChain *toSum);
 void subtractBinaryChain(binaryChain *target, binaryChain *toSub);
 bool isAmayor(binaryChain *A, binaryChain *B);
+bool isEqual(binaryChain *A, binaryChain *B);
+void deleteChain(binaryChain *toDelete);
 ////////////////////Functions that are being made.////////////////////
-
+void deleteChain(binaryChain *toDelete){
+	binaryLink *temp=toDelete->first;
+	binaryLink *last=toDelete->first;
+	while(temp!=NULL){
+		last=temp;
+		temp=temp->prev;
+		if(last!=NULL){
+			delete last;
+		}
+	}
+}
 ////////////////////Functions  already  performed.////////////////////
+bool isEqual(binaryChain *A, binaryChain *B){
+	binaryLink *targetA = A->last, *targetB = B->last;
+	bool exit = true;
+	while(targetA!=NULL && targetB!=NULL){
+		if(targetA->value!=targetB->value)
+			exit=false;
+		targetA = targetA->next;
+		targetB = targetB->next;
+	}
+	binaryLink *notNUll;
+	if(targetA!=NULL)
+		notNUll=targetA;
+	else if(targetB!=NULL)
+		notNUll=targetB;
+	while(notNUll!=NULL){
+		if(notNUll->value)
+			exit=false;
+		notNUll=notNUll->next;
+	}
+	return exit;
+}
 bool isAmayor(binaryChain *A, binaryChain *B){
 	binaryLink *targetA = A->last, *targetB = B->last;
 	bool same = true;
