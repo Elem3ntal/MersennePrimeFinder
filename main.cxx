@@ -27,8 +27,9 @@
 
 int main(int argc, char **argv)
 {
-	int N=31; //amount of "1" to conform the binary
+	int N=19; //amount of "1" to conform the binary
 	bool flag = false;
+	binaryChain *Target;
 	binaryChain *maxDivisory = createChain(true);
 	binaryChain *divisor = createChain(true);
 	binaryChain *two = createChain(true);
@@ -43,7 +44,7 @@ int main(int argc, char **argv)
 		addToTheRight(maxDivisory,true);
 	}
 	while (!isAmayor(divisor,maxDivisory)){
-		binaryChain *Target = createChain(true);
+		Target = createChain(true);
 		addToTheLeft(Target,false);
 		for(int i=0;i<N-1;i++){
 			addToTheRight(Target,true);
@@ -56,7 +57,7 @@ int main(int argc, char **argv)
 		deleteChain(Target);
 		delete Target;
 		if(flag){
-			cout << "The number isn't pryme\n";
+			cout << "The number isn't prime\n";
 			break;
 		}
 		//int a;
@@ -72,7 +73,7 @@ int main(int argc, char **argv)
 		addBinaryChain(divisor,two);*/
 		cout << "---------\n";
 	if(!flag)
-		cout<<"the number is pryme\n";
+		cout<<"the number is prime\n";
 	/*
 	//always before operate add a false to the left.
 	addBinaryChain(chainA,two1);

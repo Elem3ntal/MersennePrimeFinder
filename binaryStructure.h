@@ -157,21 +157,19 @@ void addBinaryChain(binaryChain *target, binaryChain *toSum){
 	}
 }
 void addToTheLeft(binaryChain *chain, bool _value){
-	binaryLink *tempLink = chain->first;
 	binaryLink *newOne = new binaryLink;
 	newOne->value=_value;
 	newOne->next = NULL;
-	newOne->prev = tempLink;
-	tempLink->next = newOne;
+	newOne->prev = chain->first;
+	chain->first->next = newOne;
 	chain->first = newOne;
 }
 void addToTheRight(binaryChain *chain, bool _value){
-	binaryLink *tempLink = chain->last;
 	binaryLink *newOne = new binaryLink;
 	newOne->value=_value;
-	newOne->next = tempLink;
+	newOne->next = chain->last;
 	newOne->prev = NULL;
-	tempLink->prev = newOne;
+	chain->last->prev = newOne;
 	chain->last = newOne;
 }
 binaryChain* createChain(int length){ //create a new chain with a preset value
@@ -213,15 +211,13 @@ void plusOne(binaryChain *chain){//add one to the chain
 	//always check if the first link must be zero
 }
 void checkSpace(binaryChain *chain){
-	binaryChain *tempChain = chain;
-	binaryLink *tempLink = tempChain->first;
-	if(tempLink->value){
+	if(chain->first->value){
 		binaryLink *newOne = new binaryLink;
 		newOne->value=false;
 		newOne->next = NULL;
-		newOne->prev = tempLink;
-		tempLink->next = newOne;
-		tempChain->first = newOne;
+		newOne->prev = chain->first;
+		chain->first->next = newOne;
+		chain->first = newOne;
 	}
 }
 
