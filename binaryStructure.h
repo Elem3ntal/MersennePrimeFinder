@@ -22,7 +22,24 @@ void subtractBinaryChain(binaryChain *target, binaryChain *toSub);
 bool isAmayor(binaryChain *A, binaryChain *B);
 bool isEqual(binaryChain *A, binaryChain *B);
 void deleteChain(binaryChain *toDelete);
+binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain* divisor);
 ////////////////////Functions that are being made.////////////////////
+binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain *divisor){
+	//note: 15/3=5	1111/11=101
+	binaryChain *auxDividend = createChain(false);
+	binaryChain *result = createChain(false);
+	binaryLink *tempDividend = dividend->first;
+	binaryLink *tempDivisor=divisor->first;
+	while(tempDivisor!=NULL){
+		addToTheRight(auxDividend,tempDividend->value);
+		tempDividend=tempDividend->prev;
+		tempDivisor= tempDivisor->prev;
+	}
+	printBinaryChain(auxDividend);
+	subtractBinaryChain(auxDividend,divisor);
+	return auxDividend;
+}
+////////////////////Functions  already  performed.////////////////////
 void deleteChain(binaryChain *toDelete){
 	binaryLink *temp=toDelete->first;
 	binaryLink *last=toDelete->first;
@@ -34,7 +51,6 @@ void deleteChain(binaryChain *toDelete){
 		}
 	}
 }
-////////////////////Functions  already  performed.////////////////////
 bool isEqual(binaryChain *A, binaryChain *B){
 	binaryLink *targetA = A->last, *targetB = B->last;
 	bool exit = true;

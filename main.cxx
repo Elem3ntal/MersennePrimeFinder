@@ -24,10 +24,36 @@
 #include <iostream>
 #include <string.h>
 #include "binaryStructure.h"
+int algorithmTest(int N);
+void test();
 
 int main(int argc, char **argv)
 {
-	int N=19; //amount of "1" to conform the binary
+	test();
+	return 0;
+}
+
+void test()
+{
+	binaryChain *N2=createChain(true);
+	binaryChain *N1=createChain(true);
+	addToTheRight(N1,true);
+	addToTheRight(N1,true);
+	addToTheRight(N1,false);
+	addToTheRight(N1,true);
+	addToTheRight(N1,false);
+	addToTheRight(N1,true);
+	addToTheRight(N2,false);
+	addToTheRight(N2,true);
+	printBinaryChain(N1);
+	cout<<"------------"<<endl;
+	printBinaryChain(N2);
+	cout<<"------------"<<endl;
+	printBinaryChain(divideBinaryChain(N1,N2));
+	
+}
+int algorithmTest(int N)//amount of "1" to conform the binary
+{
 	bool flag = false;
 	binaryChain *Target;
 	binaryChain *maxDivisory = createChain(true);
@@ -50,7 +76,6 @@ int main(int argc, char **argv)
 			addToTheRight(Target,true);
 		}
 		while(!isAmayor(divisor,Target) && !isEqual(divisor,Target)){
-			//printBinaryChain(Target);
 			subtractBinaryChain(Target,divisor);
 		}
 		flag=isEqual(Target,divisor);
@@ -60,41 +85,10 @@ int main(int argc, char **argv)
 			cout << "The number isn't prime\n";
 			break;
 		}
-		//int a;
-		//cin>>a;
-		//printBinaryChain(Target);
-		//printBinaryChain(maxDivisory);
-		//printBinaryChain(divisor);
 		addBinaryChain(divisor,two);
-		//cout << "---------\n";
-	}/*
-		printBinaryChain(maxDivisory);
-		printBinaryChain(divisor);
-		addBinaryChain(divisor,two);*/
 		cout << "---------\n";
+	}
 	if(!flag)
 		cout<<"the number is prime\n";
-	/*
-	//always before operate add a false to the left.
-	addBinaryChain(chainA,two1);
-	addToTheLeft(chainA,false);
-	addToTheLeft(chainB,false);
-	printBinaryChain(chainA); //123
-	printBinaryChain(chainB); // 16
-	printBinaryChain(two1); // 2
-	cout << "----------\n";
-	while(isAmayor(chainA,chainB)){
-		printBinaryChain(chainA);
-		subtractBinaryChain(chainA,chainB);
-		//printBinaryChain(chainB); // 16
-	}
-	cout << "----------\n";
-	printBinaryChain(chainA);
-	subtractBinaryChain(chainA,chainB);
-	printBinaryChain(chainA); //123
-	printBinaryChain(chainB); // 16
-	cout << "---------\n";
-	cout << isEqual(chainA,chainB);*/
 	return 0;
 }
-
