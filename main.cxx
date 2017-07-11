@@ -26,106 +26,76 @@
 #include "binaryStructure.h"
 int algorithmTest(int N);
 void test();
-void testResta();
 
 int main(int argc, char **argv)
 {
-	test();
+//	test();
+	algorithmTest(31);
 	return 0;
 }
 
-void testResta()
-{
-	binaryChain *N1=createChain(false);
-	binaryChain *N2=createChain(false);
-	addToTheRight(N1,false);
-	addToTheRight(N1,true);
-	addToTheRight(N1,false);
-	addToTheRight(N1,true);
-	addToTheRight(N1,false);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N2,true);
-	addToTheRight(N2,true);
-	addToTheRight(N2,true);
-	addToTheRight(N2,true);
-	addToTheRight(N2,true);
-	cout << "N1: ";
-	printBinaryChain(N1);
-	cout << "N2: ";
-	printBinaryChain(N2);
-	cout << "Equal: " <<isEqual(N1,N2)<<endl;
-	subtractBinaryChain(N1,N2);
-	printBinaryChain(N1);
-}
 void test()
 {
 	binaryChain *N1=createChain(false);
 	binaryChain *N2=createChain(false);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
-	addToTheRight(N1,true);
+	for(int i=0;i<11;i++)
+		addToTheRight(N1,true);
 	addToTheRight(N2,true);
 	addToTheRight(N2,false);
 	addToTheRight(N2,true);
-	addToTheRight(N2,false);
 	addToTheRight(N2,true);
-	cout << "N1: ";
+	addToTheRight(N2,true);
 	printBinaryChain(N1);
-	cout << "N2: ";
 	printBinaryChain(N2);
-	cout << "Division: ";
-	printBinaryChain(divideBinaryChain(N1,N2));
-	cout << "Multiplication: ";
-	printBinaryChain(multiplicateBinaryChain(N1,N2));
-	printBinaryChain(divideBinaryChain(N1,N2));
-		binaryChain *aux=multiplicateBinaryChain(divideBinaryChain(N1,N2),N2);
-	if(isEqual(N1,aux))
-		cout<<"Son divisores";
-	else
-		cout<<"No son divisores";
+	subtractBinaryChain(N1,N2);
+	printBinaryChain(N1);
+	subtractBinaryChain(N1,N2);
+	printBinaryChain(N1);
+	subtractBinaryChain(N1,N2);
+	printBinaryChain(N1);
+	subtractBinaryChain(N1,N2);
+	printBinaryChain(N1);
 }
 int algorithmTest(int N)//amount of "1" to conform the binary
 {
 	bool flag = false;
-	binaryChain *Target;
-	binaryChain *maxDivisory = createChain(true);
-	binaryChain *divisor = createChain(true);
-	binaryChain *two = createChain(true);
-	//every number has to had a cero in the left
-	addToTheLeft(maxDivisory,false);
-	addToTheLeft(divisor,false);
-	addToTheLeft(two,false);
-	//cycles for to create the two, divisor and maxDivisor
-	addToTheRight(two,false);//to create the number two
-	addToTheRight(divisor,true);//to create first divisor
-	for(int i=0;i<N-2;i++){ //to create max divisor
-		addToTheRight(maxDivisory,true);
+	binaryChain *Target = createChain(false);
+	binaryChain *maxDivisory = NULL;
+	binaryChain *divisor = createChain(false);
+	binaryChain *two = createChain(false);
+	binaryChain *three = createChain(false);
+	//two: to increase the divisor
+	addToTheRight(two,true);
+	addToTheRight(two,false);
+	//three: to split and generate the maxDivisory
+	addToTheRight(three,true);
+	addToTheRight(three,true);
+	//divisor: start in 3...
+	addToTheRight(divisor,true);
+	addToTheRight(divisor,true);
+	//seed to analize
+	for(int i=0;i<N;i++){ //to create max divisor
+		addToTheRight(Target,true);
 	}
+	maxDivisory=divideBinaryChain(Target,three);
+	//----------
+	cout << "----------Numbers with work----------" <<endl;
+	cout << "Target: "; printBinaryChain(Target);
+	cout << "maxDivisory: "; printBinaryChain(maxDivisory);
+	cout << "divisor: "; printBinaryChain(divisor);
+	cout << "two: "; printBinaryChain(two);
+	cout << "three: "; printBinaryChain(three);
+	cout << "-------------------------------------\n\n" <<endl;
+	//----------
 	while (!isAmayor(divisor,maxDivisory)){
-		Target = createChain(true);
-		addToTheLeft(Target,false);
-		for(int i=0;i<N-1;i++){
-			addToTheRight(Target,true);
-		}
-		while(!isAmayor(divisor,Target) && !isEqual(divisor,Target)){
-			subtractBinaryChain(Target,divisor);
-		}
-		flag=isEqual(Target,divisor);
-		deleteChain(Target);
-		delete Target;
+		binaryChain *aux=divideBinaryChain(Target,divisor);
+		aux=multiplicateBinaryChain(aux,divisor);
+		flag=isEqual(Target,aux);
 		if(flag){
 			cout << "The number isn't prime\n";
 			break;
 		}
 		addBinaryChain(divisor,two);
-		cout << "---------\n";
 	}
 	if(!flag)
 		cout<<"the number is prime\n";
