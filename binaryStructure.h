@@ -23,30 +23,86 @@ bool isAmayor(binaryChain *A, binaryChain *B);
 bool isEqual(binaryChain *A, binaryChain *B);
 void deleteChain(binaryChain *toDelete);
 binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain* divisor);
+binaryChain *multiplicateBinaryChain(binaryChain* A, binaryChain* B);
 ////////////////////Functions that are being made.////////////////////
-binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain *divisor){
-	//note: 15/3=5	1111/11=101
-	binaryChain *auxDividend = createChain(false);
+
+////////////////////Functions already performed.////////////////////
+binaryChain *multiplicateBinaryChain(binaryChain* A, binaryChain* B){
 	binaryChain *result = createChain(false);
-	binaryLink *tempDividend = dividend->first;
-	binaryLink *tempDivisor=divisor->first;
-	while(tempDivisor!=NULL){
-		addToTheRight(auxDividend,tempDividend->value);
-		tempDividend=tempDividend->prev;
-		tempDivisor= tempDivisor->prev;
+	binaryChain *tempMulti = createChain(false);
+	binaryLink *tempA = A->last;
+	while(tempA!=NULL){
+		if(tempA->value){
+			binaryLink *tempB = B->first;
+			binaryLink *temp0 = tempMulti->last;
+			binaryChain *auxResult = createChain(false);
+			while(tempB!=NULL){
+				addToTheRight(auxResult,tempB->value);
+				tempB=tempB->prev;
+			}
+			while(temp0!=NULL){
+				addToTheRight(auxResult,false);
+				temp0=temp0->next;
+			}
+			addBinaryChain(result,auxResult);
+		}
+		addToTheRight(tempMulti,false);
+		tempA = tempA-> next;
 	}
-	printBinaryChain(auxDividend);
-	subtractBinaryChain(auxDividend,divisor);
-	return auxDividend;
+	result->last->next->prev=NULL;
+	result->last = result->last->next;
+	return result;
 }
-////////////////////Functions  already  performed.////////////////////
+binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain *divisor){
+	//note: 68/11 = 6	1000100/1011 = 110
+	binaryChain *auxDividend = createChain(false); //to create part of the number do divid
+	binaryChain *result = createChain(false); //to acumulate the result
+	binaryLink *tempDividend = dividend->first;
+	binaryLink *tempDivisor = divisor->first;
+	while(!tempDividend->value)
+		tempDividend = tempDividend->prev;
+	while(!tempDivisor->value)
+		tempDivisor = tempDivisor->prev;
+	while(tempDivisor!= NULL){
+		addToTheRight(auxDividend,tempDividend->value);
+		tempDividend = tempDividend->prev;
+		tempDivisor = tempDivisor->prev;
+	}
+	if(isAmayor(auxDividend,divisor)){
+		addToTheRight(result,true);
+		subtractBinaryChain(auxDividend,divisor);
+	}
+	else if(isEqual(auxDividend,divisor)){
+		addToTheRight(result,true);
+		auxDividend=createChain(false);
+	}
+	else{
+		addToTheRight(result,false);
+	}
+	while(tempDividend!=NULL){
+		addToTheRight(auxDividend,tempDividend->value);
+		if(isAmayor(auxDividend,divisor)){
+			addToTheRight(result,true);
+			subtractBinaryChain(auxDividend,divisor);
+		}
+		else if(isEqual(auxDividend,divisor)){
+			addToTheRight(result,true);
+			auxDividend=createChain(false);
+		}
+		else{
+			addToTheRight(result,false);
+		}
+		tempDividend = tempDividend->prev;
+	}
+	return result;
+}
 void deleteChain(binaryChain *toDelete){
-	binaryLink *temp=toDelete->first;
-	binaryLink *last=toDelete->first;
-	while(temp!=NULL){
-		last=temp;
-		temp=temp->prev;
-		if(last!=NULL){
+	binaryLink *temp = toDelete->first;
+	binaryLink *last = toDelete->first;
+	while(temp!= NULL){
+		last = temp;
+		temp = temp->prev;
+		if(last!= NULL){
 			delete last;
 		}
 	}
@@ -54,21 +110,25 @@ void deleteChain(binaryChain *toDelete){
 bool isEqual(binaryChain *A, binaryChain *B){
 	binaryLink *targetA = A->last, *targetB = B->last;
 	bool exit = true;
-	while(targetA!=NULL && targetB!=NULL){
-		if(targetA->value!=targetB->value)
-			exit=false;
+	while(targetA!= NULL && targetB!= NULL){
+		if(targetA->value!= targetB->value)
+			exit = false;
 		targetA = targetA->next;
 		targetB = targetB->next;
 	}
-	binaryLink *notNUll;
-	if(targetA!=NULL)
-		notNUll=targetA;
-	else if(targetB!=NULL)
-		notNUll=targetB;
-	while(notNUll!=NULL){
+	binaryLink *notNUll = NULL;
+	if (targetA== NULL && targetB== NULL)
+		return exit;
+	else if(targetA!= NULL){
+		notNUll = targetA;
+	}
+	else if(targetB!= NULL){
+		notNUll = targetB;
+	}
+	while(notNUll!= NULL){
 		if(notNUll->value)
-			exit=false;
-		notNUll=notNUll->next;
+			exit = false;
+		notNUll = notNUll->next;
 	}
 	return exit;
 }
@@ -76,10 +136,10 @@ bool isAmayor(binaryChain *A, binaryChain *B){
 	binaryLink *targetA = A->last, *targetB = B->last;
 	bool same = true;
 	bool aMayor = true;
-	while(targetA!=NULL && targetB!=NULL){
-		if(targetA->value==targetB->value){
+	while(targetA!= NULL && targetB!= NULL){
+		if(targetA->value == targetB->value){
 		}
-		else if(targetB->value==false && targetA->value==true){
+		else if(targetB->value == false && targetA->value == true){
 			aMayor = true;
 			same = false;
 		}
@@ -91,34 +151,34 @@ bool isAmayor(binaryChain *A, binaryChain *B){
 		targetB = targetB->next;
 	}
 	//cout << "bool state: "<< aMayor << endl;
-	if(targetA!=NULL){
-		if(targetA->value==true && targetB==NULL)
+	if(targetA!= NULL){
+		if(targetA->value == true && targetB == NULL)
 			aMayor = true;
 	}
-	if (same==true)
+	if (same == true)
 		return false;
 	return aMayor;
 }
 void subtractBinaryChain(binaryChain *target, binaryChain *toSub){
 	//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter
 	binaryLink *a = target->last, *b = toSub->last;
-	bool carry = false; //true and true is false, and carry true to the nex one, 1+1=10
-	while((a!=NULL && b!=NULL)){
+	bool carry = false; //true and true is false, and carry true to the nex one, 1+1 = 10
+	while((a!= NULL && b!= NULL) || carry){
 		if(carry){//Two cases possible with carry, the link where the sum goes exists or does not
-			if(a!=NULL){ //if A exist, are two posibilites, A have a False or True
+			if(a!= NULL){ //if A exist, are two posibilites, A have a False or True
 				if(a->value)
-					a->value=false;
+					a->value = false;
 				else{
-					a->value=true;
-					carry=false;
+					a->value = true;
+					carry = false;
 				}
 			}
 			else{ // comes here if a not exist and whe have a carry.
 				addToTheLeft(target,true);
-				carry=false;
+				carry = false;
 			}
 		}
-		if(b!=NULL && a!=NULL){
+		if(b!= NULL && a!= NULL){
 			if(a->value && !b->value){
 				a->value = false;
 				carry = true;
@@ -127,37 +187,38 @@ void subtractBinaryChain(binaryChain *target, binaryChain *toSub){
 				a->value = true;
 			}
 		}
-		if(a!=NULL)
-			a=a->next;
-		if(b->next==NULL)
-			addToTheLeft(toSub,false);
-		if(b!=NULL)
-			b=b->next;
+		if(a!= NULL){
+			a = a->next;
+		}
+		if(b!= NULL)
+			b = b->next;
 	}
-	//drop the first one
-	target->first=target->first->prev;
+	binaryLink *drop = target->first;
+	target->first = target->first->prev;
+	target->first->next=NULL;
+	delete drop;
 	plusOne(target);
 }
 void addBinaryChain(binaryChain *target, binaryChain *toSum){
 	//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter
 	binaryLink *a = target->last, *b = toSum->last;
-	bool carry = false; //true and true is false, and carry true to the nex one, 1+1=10
-	while((a!=NULL || b!=NULL) || carry){
+	bool carry = false; //true and true is false, and carry true to the nex one, 1+1 = 10
+	while((a!= NULL || b!= NULL) || carry){
 		if(carry){//Two cases possible with carry, the link where the sum goes exists or does not
-			if(a!=NULL){ //if A exist, are two posibilites, A have a False or True
+			if(a!= NULL){ //if A exist, are two posibilites, A have a False or True
 				if(a->value)
-					a->value=false;
+					a->value = false;
 				else{
-					a->value=true;
-					carry=false;
+					a->value = true;
+					carry = false;
 				}
 			}
 			else{ // comes here if a not exist and whe have a carry.
 				addToTheLeft(target,true);
-				carry=false;
+				carry = false;
 			}
 		}
-		if(b!=NULL && a!=NULL){
+		if(b!= NULL && a!= NULL){
 			if(a->value && b->value){
 				a->value = false;
 				carry = true;
@@ -166,15 +227,17 @@ void addBinaryChain(binaryChain *target, binaryChain *toSum){
 				a->value = true;
 			}
 		}
-		if(a!=NULL)
-			a=a->next;
-		if(b!=NULL)
-			b=b->next;
+		if(a->next == NULL && b!=NULL && carry== false)
+			addToTheLeft(target,false);
+		if(a!= NULL)
+			a = a->next;
+		if(b!= NULL)
+			b = b->next;
 	}
 }
 void addToTheLeft(binaryChain *chain, bool _value){
 	binaryLink *newOne = new binaryLink;
-	newOne->value=_value;
+	newOne->value = _value;
 	newOne->next = NULL;
 	newOne->prev = chain->first;
 	chain->first->next = newOne;
@@ -182,7 +245,7 @@ void addToTheLeft(binaryChain *chain, bool _value){
 }
 void addToTheRight(binaryChain *chain, bool _value){
 	binaryLink *newOne = new binaryLink;
-	newOne->value=_value;
+	newOne->value = _value;
 	newOne->next = chain->last;
 	newOne->prev = NULL;
 	chain->last->prev = newOne;
@@ -195,33 +258,33 @@ binaryChain* createChain(int length){ //create a new chain with a preset value
 	newChain->first = newLink;
 	newLink->value = false;
 	newLink->prev = NULL;
-	for(int i=1;i<length;i++){
+	for(int i = 1;i<length;i++){
 		binaryLink *newOne = new binaryLink;
-		newOne->value=false;
-		if(i==1){
+		newOne->value = false;
+		if(i == 1){
 			newLink->next = newOne;
 		}
 		else{
-			newChain->first->next=newOne;
+			newChain->first->next = newOne;
 		}
-		newOne->next=NULL;
-		newOne->prev=newChain->first;
-		newChain->first=newOne;
+		newOne->next = NULL;
+		newOne->prev = newChain->first;
+		newChain->first = newOne;
 	}
 	return newChain;
 }
 void plusOne(binaryChain *chain){//add one to the chain
 	checkSpace(chain);
 	binaryLink *tempLink = chain->last;
-	while(tempLink!=NULL){
+	while(tempLink!= NULL){
 		if(tempLink->value){
-			tempLink->value=false;
+			tempLink->value = false;
 		}
-		else if(tempLink->value==false){
-			tempLink->value=true;
+		else if(tempLink->value == false){
+			tempLink->value = true;
 			return;
 		}
-		tempLink=tempLink->next;
+		tempLink = tempLink->next;
 	}
 	//move from the right to the left, if is true, change to zero and continue, if is zero change to true and end.
 	//always check if the first link must be zero
@@ -229,7 +292,7 @@ void plusOne(binaryChain *chain){//add one to the chain
 void checkSpace(binaryChain *chain){
 	if(chain->first->value){
 		binaryLink *newOne = new binaryLink;
-		newOne->value=false;
+		newOne->value = false;
 		newOne->next = NULL;
 		newOne->prev = chain->first;
 		chain->first->next = newOne;
@@ -249,10 +312,10 @@ binaryChain* createChain(bool _Value){ //create a new chain with a preset value
 }
 void printBinaryChain(binaryChain *toPrint){ //just print... dah!
 	//checkSpace(toPrint);
-	binaryLink *temp=toPrint->first;
-	while(temp!=NULL){
+	binaryLink *temp = toPrint->first;
+	while(temp!= NULL){
 		cout << temp->value;
-		temp=temp->prev;
+		temp = temp->prev;
 	}
 	cout << endl;
 }
