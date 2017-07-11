@@ -106,6 +106,7 @@ void deleteChain(binaryChain *toDelete){
 		temp = temp->prev;
 		delete last;
 	}
+	delete temp;
 }
 bool isEqual(binaryChain *A, binaryChain *B){
 	binaryLink *targetA = A->last, *targetB = B->last;
@@ -130,6 +131,7 @@ bool isEqual(binaryChain *A, binaryChain *B){
 			exit = false;
 		notNUll = notNUll->next;
 	}
+	delete notNUll;
 	return exit;
 }
 bool isAmayor(binaryChain *A, binaryChain *B){

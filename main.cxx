@@ -29,32 +29,27 @@ void test();
 
 int main(int argc, char **argv)
 {
-//	test();
-	algorithmTest(31);
+	test();
+//	algorithmTest(21);
 	return 0;
 }
 
 void test()
 {
-	binaryChain *N1=createChain(false);
-	binaryChain *N2=createChain(false);
-	for(int i=0;i<11;i++)
-		addToTheRight(N1,true);
-	addToTheRight(N2,true);
-	addToTheRight(N2,false);
-	addToTheRight(N2,true);
-	addToTheRight(N2,true);
-	addToTheRight(N2,true);
-	printBinaryChain(N1);
-	printBinaryChain(N2);
-	subtractBinaryChain(N1,N2);
-	printBinaryChain(N1);
-	subtractBinaryChain(N1,N2);
-	printBinaryChain(N1);
-	subtractBinaryChain(N1,N2);
-	printBinaryChain(N1);
-	subtractBinaryChain(N1,N2);
-	printBinaryChain(N1);
+	binaryChain *divisor = createChain(false);
+	binaryChain *five = createChain(false);
+	binaryChain *number = createChain(false);
+	//two: to increase the divisor
+	addToTheRight(five,true);
+	addToTheRight(five,false);
+	addToTheRight(five,true);
+	//three: to split and generate the maxDivisory
+	//divisor: start in 3...
+	for(int i=0;i<10;i++){
+		cout<<(5*i)<<": ";
+		printBinaryChain(number);
+		addBinaryChain(number,five);
+	}
 }
 int algorithmTest(int N)//amount of "1" to conform the binary
 {
