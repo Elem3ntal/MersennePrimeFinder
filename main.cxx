@@ -23,56 +23,84 @@
 
 #include <iostream>
 #include <string.h>
+#include <stdlib.h>
 #include "binaryStructure.h"
+#include "digitalcounter.h"
+
 int algorithmTest(int N);
-void test();
+void test(int N);
 
 int main(int argc, char **argv)
 {
-	test();
-//	algorithmTest(21);
+//	test(1000);
+	algorithmTest(31);
 	return 0;
 }
 
-void test()
+void test(int N)
 {
-	binaryChain *divisor = createChain(false);
-	binaryChain *five = createChain(false);
-	binaryChain *number = createChain(false);
+	binaryChain *seven = createChain(false);
 	//two: to increase the divisor
-	addToTheRight(five,true);
-	addToTheRight(five,false);
-	addToTheRight(five,true);
-	//three: to split and generate the maxDivisory
-	//divisor: start in 3...
-	for(int i=0;i<10;i++){
-		cout<<(5*i)<<": ";
-		printBinaryChain(number);
-		addBinaryChain(number,five);
+	printBinaryChain(seven);
+	for(int i=0;i<N;i++){ //to create max divisor
+		addToTheRight(seven,true);
 	}
+	printBinaryChain(seven);
+	int pause;
+	cin >> pause;
+	deleteChain(seven);
+	printBinaryChain(seven);
+	cin >> pause;
+	seven=createChain(false);
+	for(int i=0;i<N;i++){ //to create max divisor
+		addToTheRight(seven,true);
+	}
+	printBinaryChain(seven);
+	cin >> pause;
 }
 int algorithmTest(int N)//amount of "1" to conform the binary
 {
 	bool flag = false;
-	binaryChain *Target = createChain(false);
-	binaryChain *maxDivisory = NULL;
-	binaryChain *divisor = createChain(false);
 	binaryChain *two = createChain(false);
 	binaryChain *three = createChain(false);
+	binaryChain *five = createChain(false);
+	binaryChain *seven = createChain(false);
+	binaryChain *Target = createChain(false);
+	binaryChain *maxDivisory = NULL;
+	binaryChain *auxDivisor1 = createChain(false);
+	binaryChain *auxDivisor2 = createChain(false);
+	binaryChain *auxDivisor3 = createChain(false);
+	binaryChain *divisor = createChain(false);
+	binaryChain *aux = NULL;
+	//
 	//two: to increase the divisor
 	addToTheRight(two,true);
 	addToTheRight(two,false);
 	//three: to split and generate the maxDivisory
 	addToTheRight(three,true);
 	addToTheRight(three,true);
-	//divisor: start in 3...
+	addToTheRight(five,true);
+	addToTheRight(five,false);
+	addToTheRight(five,true);
+	addToTheRight(seven,true);
+	addToTheRight(seven,true);
+	addToTheRight(seven,true);
+	//divisor: start in 11...
+	addToTheRight(divisor,true);
+	addToTheRight(divisor,false);
 	addToTheRight(divisor,true);
 	addToTheRight(divisor,true);
+	//increase the auxDivisors to is start number
+	addToTheRight(auxDivisor1,true);
+	addToTheRight(auxDivisor2,true);
+	addToTheRight(auxDivisor2,true);
+	addToTheRight(auxDivisor3,true);
+	addToTheRight(auxDivisor3,false);
 	//seed to analize
 	for(int i=0;i<N;i++){ //to create max divisor
 		addToTheRight(Target,true);
 	}
-	maxDivisory=divideBinaryChain(Target,three);
+	maxDivisory=divideBinaryChain(Target,divisor);
 	//----------
 	cout << "----------Numbers with work----------" <<endl;
 	cout << "Target: "; printBinaryChain(Target);
@@ -80,19 +108,46 @@ int algorithmTest(int N)//amount of "1" to conform the binary
 	cout << "divisor: "; printBinaryChain(divisor);
 	cout << "two: "; printBinaryChain(two);
 	cout << "three: "; printBinaryChain(three);
-	cout << "-------------------------------------\n\n" <<endl;
+	cout << "-------------------------------------" <<endl;
 	//----------
 	while (!isAmayor(divisor,maxDivisory)){
-		binaryChain *aux=divideBinaryChain(Target,divisor);
-		aux=multiplicateBinaryChain(aux,divisor);
-		flag=isEqual(Target,aux);
-		if(flag){
+		//printBinaryChain(divisor);
+		//aux=divideBinaryChain(Target,divisor);
+		//aux=multiplicateBinaryChain(aux,divisor);
+		aux=multiplicateBinaryChain(divideBinaryChain(Target,divisor),divisor);
+		if(isEqual(Target,aux)){
 			cout << "The number isn't prime\n";
 			break;
 		}
-		addBinaryChain(divisor,two);
+		//increase the aux divisors
+		//flag=true;
+		do{
+			addBinaryChain(divisor,two);
+			flag=false;
+			plusOne(auxDivisor1);
+			plusOne(auxDivisor2);
+			plusOne(auxDivisor3);
+			//analize
+			if(isEqual(auxDivisor1,three)){
+				deleteChain(auxDivisor1);
+				auxDivisor1=createChain(false);
+				flag=true;
+			}
+			if(isEqual(auxDivisor2,five)){
+				deleteChain(auxDivisor2);
+				auxDivisor2=createChain(false);
+				flag=true;
+			}
+			if(isEqual(auxDivisor3,seven)){
+				deleteChain(auxDivisor3);
+				auxDivisor3=createChain(false);
+				flag=true;
+			}
+		}while(flag);
+		deleteChain(aux);
+		aux->~binaryChain();
 	}
-	if(!flag)
+	if(isAmayor(divisor,maxDivisory))
 		cout<<"the number is prime\n";
 	return 0;
 }
