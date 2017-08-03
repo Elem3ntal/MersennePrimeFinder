@@ -130,22 +130,21 @@ int algorithmTest(int N)//amount of "1" to conform the binary
 			//analize
 			if(isEqual(auxDivisor1,three)){
 				deleteChain(auxDivisor1);
-				auxDivisor1=createChain(false);
+				//auxDivisor1=createChain(false);
 				flag=true;
 			}
 			if(isEqual(auxDivisor2,five)){
 				deleteChain(auxDivisor2);
-				auxDivisor2=createChain(false);
+				//auxDivisor2=createChain(false);
 				flag=true;
 			}
 			if(isEqual(auxDivisor3,seven)){
 				deleteChain(auxDivisor3);
-				auxDivisor3=createChain(false);
+				//auxDivisor3=createChain(false);
 				flag=true;
 			}
 		}while(flag);
 		deleteChain(aux);
-		aux->~binaryChain();
 	}
 	if(isAmayor(divisor,maxDivisory))
 		cout<<"the number is prime\n";

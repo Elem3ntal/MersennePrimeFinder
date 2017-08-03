@@ -8,205 +8,366 @@
       <link rel="stylesheet" type="text/css" href="index.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <title>Mersenne Prime Finder</title>
    </head>
 
    <body>
       <header>
-         <title>Mersenne Prime Finder</title>
          <h2>Mersenne Prime Finder</h2>
       </header>
-      <div id="main">
-         <p class="textJ">In the search of Mersenne prime numbers we need to work with big amount of data, those are big numbers! those prime numbers are made with the formula (2<sup>n</sup>)-1, and in the informatic world the limit of a integer value es 2.147.483.647 (wich is the 8° mersenne's prime), so, we can't use regular variables, thus we can't use integer or float variables.</p>
-         <p class="textJ">It will be created a structure binary (are faster in big computations) to adapt is grow in dynamic form, and also create is basic operations add, rest, multiplication, division, power and module; and finally a conversor from this tipe of binary data to decimal data.</p>
-         <p class="textJ"><i>this web site will be write like a blog, from down(latest) to up(newest), so, time in time, i can read thoughts and ideas that i have from this.</i></p>
+      <div id="innerBody">
+         <div id="main">
+            <p class="textJ">In the search of Mersenne prime numbers we need to work with big amount of data, those are big numbers! those prime numbers are made with the formula (2<sup>n</sup>)-1, and in the informatic world the limit of a integer value es 2.147.483.647 (wich is the 8° mersenne's prime), so, we can't use regular variables, thus we can't use integer or float variables.</p>
+            <p class="textJ">It will be created a structure binary (are faster in big computations) to adapt is grow in dynamic form, and also create is basic operations add, rest, multiplication, division, power and module; and finally a conversor from this tipe of binary data to decimal data.</p>
+            <p class="textJ"><i>this web site will be write like a blog, from down(latest) to up(newest), so, time in time, i can read thoughts and ideas that i have from this.</i></p>
+         </div>
+         <div id="log">
+            <!--         -->
+            <div>
+               <p id="date">Date: 2017-August</p>
+               <p class="textJ">Conclusions! <s><i> (The End?) </i></s><br>Pendient!!! (this week, i promise)</p>
+<!--
+               <div id="divTable" align="center">
+                  <table>
+                     <tbody style="width:90%">
+                        <tr>
+                           <th>code</th>
+                        </tr>
+                        <tr>
+                           <td>asdasd</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+-->
+            </div>
+            <!--         -->
+            <div>
+               <p id="date">Date: 2017-july</p>
+               <p class="textJ">The Algorithm! <s><i> (again) </i></s><br> Ok, by the moment exist:<br>
+                  4 Basic operations: add, subtract, multiplication and divide.<br>
+                  2 Logic operations: "is mayor" and "is equals".<br>
+                  coming soon!
+                  </p>
+<!--
+               <div id="divTable" align="center">
+                  <table>
+                     <tbody style="width:90%">
+                        <tr>
+                           <th>code</th>
+                        </tr>
+                        <tr>
+                           <td>asdasd</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+-->
+            </div>
+            <!--         -->
+            <div>
+               <p id=date>Date: 2017-july</p>
+               <p class="textJ">Added Divisions!</p>
+               <p class="textJ">I think this is the complex method, because isn't the creation of a new number (like the adds or multiplication) is the "decomposition" of a number, and have a lot of subtractions. the method/algorithm to divide consist:</p>
+               <ul>
+                  <li><p>Take from the dividend a number big enough as the divisor. We call this number "temporary dividend".</p></li>
+                  <li><p>If the number that you take from the dividend is mayor than the divisor add true (to the right) to the result, then the substraction is done.</p></li>
+                  <li><p>If the number that you take from the dividend is equal to the divisor, add true (to the right) to the result, then this temporary dividend is reset to cero. is more eficient reset this temporary dividend than realize the substraction.</p></li>
+                  <li><p>In the end, if this temporary dividend is less than the divisor add false to the result and proced to take another number of the dividend (in the next lap).</p></li>
+                  <li><p>When isn't more numbers available from the dividend, the operation is over.</p></li>
+               </ul><br>
+               <div id="divTable" align="center">
+                  <table style="width:90%">
+                     <tbody>
+                        <th colspan='2'>Code:</th>
+                        <tr><td></td><td>binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain *divisor){</td></tr>
+                        <tr><td></td><td><tab1>binaryChain *auxDividend = createChain(false); //to create part of the number do divid</tab1></td></tr>
+                        <tr><td></td><td><tab1>binaryChain *result = createChain(false); //to acumulate the result</tab1></td></tr>
+                        <tr><td></td><td><tab1>binaryLink *tempDividend = dividend->first;</tab1></td></tr>
+                        <tr><td></td><td><tab1>binaryLink *tempDivisor = divisor->first;</tab1></td></tr>
+                        <tr><td></td><td><tab1>while(!tempDividend->value)</tab1></td></tr>
+                        <tr><td></td><td><tab2>tempDividend = tempDividend->prev;</tab2></td></tr>
+                        <tr><td></td><td><tab1>while(!tempDivisor->value)</tab1></td></tr>
+                        <tr><td></td><td><tab2>tempDivisor = tempDivisor->prev;</tab2></td></tr>
+                        <tr><td></td><td><tab1>while(tempDivisor!= NULL){</tab1></td></tr>
+                        <tr><td></td><td><tab2>addToTheRight(auxDividend,tempDividend->value);</tab2></td></tr>
+                        <tr><td></td><td><tab2>tempDividend = tempDividend->prev;</tab2></td></tr>
+                        <tr><td></td><td><tab2>tempDivisor = tempDivisor->prev;</tab2></td></tr>
+                        <tr><td></td><td><tab1>}</tab1></td></tr>
+                        <tr><td></td><td><tab1>if(isAmayor(auxDividend,divisor)){</tab1></td></tr>
+                        <tr><td></td><td><tab2>addToTheRight(result,true);</tab2></td></tr>
+                        <tr><td></td><td><tab2>subtractBinaryChain(auxDividend,divisor);</tab2></td></tr>
+                        <tr><td></td><td><tab1>}</tab1></td></tr>
+                        <tr><td></td><td><tab1>else if(isEqual(auxDividend,divisor)){</tab1></td></tr>
+                        <tr><td></td><td><tab2>addToTheRight(result,true);</tab2></td></tr>
+                        <tr><td></td><td><tab2>deleteChain(auxDividend);</tab2></td></tr>
+                        <tr><td></td><td><tab1>}</tab1></td></tr>
+                        <tr><td></td><td><tab1>else</tab1></td></tr>
+                        <tr><td></td><td><tab2>addToTheRight(result,false);</tab2></td></tr>
+                        <tr><td></td><td><tab1>while(tempDividend!=NULL){</tab1></td></tr>
+                        <tr><td></td><td><tab2>addToTheRight(auxDividend,tempDividend->value);</tab2></td></tr>
+                        <tr><td></td><td><tab2>if(!isAmayor(divisor,auxDividend)){</tab2></td></tr>
+                        <tr><td></td><td><tab3>addToTheRight(result,true);</tab3></td></tr>
+                        <tr><td></td><td><tab3>subtractBinaryChain(auxDividend,divisor);</tab3></td></tr>
+                        <tr><td></td><td><tab2>}</tab2></td></tr>
+                        <tr><td></td><td><tab2>else if(isEqual(auxDividend,divisor)){</tab2></td></tr>
+                        <tr><td></td><td><tab3>addToTheRight(result,true);</tab3></td></tr>
+                        <tr><td></td><td><tab3>deleteChain(auxDividend);</tab3></td></tr>
+                        <tr><td></td><td><tab2>}</tab2></td></tr>
+                        <tr><td></td><td><tab2>else</tab2></td></tr>
+                        <tr><td></td><td><tab3>addToTheRight(result,false);</tab3></td></tr>
+                        <tr><td></td><td><tab2>tempDividend = tempDividend->prev;</tab2></td></tr>
+                        <tr><td></td><td><tab1>}</tab1></td></tr>
+                        <tr><td></td><td><tab1>deleteChain(auxDividend);</tab1></td></tr>
+                        <tr><td></td><td><tab1>delete auxDividend->first;</tab1></td></tr>
+                        <tr><td></td><td><tab1>delete auxDividend;</tab1></td></tr>
+                        <tr><td></td><td><tab1>return result;</tab1></td></tr>
+                        <tr><td></td><td>}</td></tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <!--         -->
+
+            <div>
+               <p id=date>Date: 2017-july</p>
+               <p class="textJ">the system can multiplicate, but how? if have 2 binaries chains A and B, with N and M elements, for each N of A have to operate with each M of B. With the next rules:</p>
+               <ul>
+                  <li><p>The number of laps is the amount of zeros that have to add to the right. (N1=0, N2=00, N3=000, etc...).</p></li>
+                  <li><p>If the value of N (the element of A) is True, add to the right the zeros of this lap and add to the result.</p></li>
+                  <li><p>If the value of N (the element of A) is False, just ignore this lap (the counter of "zeros" still increase).</p></li>
+                  <li><p>In multiplication, the first lap does not add a zero, but in the structure of this program don't allow a empty number, so, in the end, has to overflow the zero of the right.</p></li>
+               </ul>
+               <br>
+               <div id="divTable" align="center">
+                  <table style="width:90%">
+                     <tbody>
+                        <th colspan='2'>Code:</th>
+                        <tr><td>1</td><td>//takes A and B and realize multiplication between those two generating a new binary chain</td></tr>
+                        <tr><td>2</td><td>binaryChain *multiplicateBinaryChain(binaryChain* A, binaryChain* B){</td></tr>
+                        <tr><td>3</td><td><tab1>binaryChain *result = createChain(false);</tab1></td></tr>
+                        <tr><td>4</td><td><tab1>binaryChain *tempMulti = createChain(false);</tab1></td></tr>
+                        <tr><td>5</td><td><tab1>binaryLink *tempA = A->last;</tab1></td></tr>
+                        <tr><td>6</td><td><tab1>while(tempA!=NULL){</tab1></td></tr>
+                        <tr><td>7</td><td><tab2>if(tempA->value){</tab2></td></tr>
+                        <tr><td>8</td><td><tab3>binaryLink *tempB = B->first;</tab3></td></tr>
+                        <tr><td>9</td><td><tab3>binaryLink *temp0 = tempMulti->last;</tab3></td></tr>
+                        <tr><td>10</td><td><tab3>binaryChain *auxResult = createChain(false);</tab3></td></tr>
+                        <tr><td>11</td><td><tab3>while(tempB!=NULL){</tab3></td></tr>
+                        <tr><td>12</td><td><tab4>addToTheRight(auxResult,tempB->value);</tab4></td></tr>
+                        <tr><td>13</td><td><tab4>tempB=tempB->prev;</tab4></td></tr>
+                        <tr><td>14</td><td><tab3>}</tab3></td></tr>
+                        <tr><td>15</td><td><tab3>while(temp0!=NULL){</tab3></td></tr>
+                        <tr><td>16</td><td><tab4>addToTheRight(auxResult,false);</tab4></td></tr>
+                        <tr><td>17</td><td><tab4>temp0=temp0->next;</tab4></td></tr>
+                        <tr><td>18</td><td><tab3>}</tab3></td></tr>
+                        <tr><td>19</td><td><tab3>addBinaryChain(result,auxResult);</tab3></td></tr>
+                        <tr><td>20</td><td><tab3>deleteChain(auxResult);</tab3></td></tr>
+                        <tr><td>21</td><td><tab3>delete auxResult;</tab3></td></tr>
+                        <tr><td>22</td><td><tab3>delete tempB;</tab3></td></tr>
+                        <tr><td>23</td><td><tab3>delete temp0;</tab3></td></tr>
+                        <tr><td>24</td><td><tab2>}</tab2></td></tr>
+                        <tr><td>25</td><td><tab2>addToTheRight(tempMulti,false);</tab2></td></tr>
+                        <tr><td>26</td><td><tab2>tempA = tempA-> next;</tab2></td></tr>
+                        <tr><td>27</td><td><tab1>}</tab1></td></tr>
+                        <tr><td>28</td><td><tab1>deleteChain(tempMulti);</tab1></td></tr>
+                        <tr><td>29</td><td><tab1>delete tempMulti;</tab1></td></tr>
+                        <tr><td>30</td><td><tab1>delete tempA;</tab1></td></tr>
+                        <tr><td>31</td><td><tab1>binaryLink *toDelete = result->last;</tab1></td></tr>
+                        <tr><td>32</td><td><tab1>result->last->next->prev=NULL;</tab1></td></tr>
+                        <tr><td>33</td><td><tab1>result->last = result->last->next;</tab1></td></tr>
+                        <tr><td>34</td><td><tab1>delete toDelete;</tab1></td></tr>
+                        <tr><td>35</td><td><tab1>return result;</tab1></td></tr>
+                        <tr><td>36</td><td>}</td></tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div>
+               <p id=date>Date: 2017-06-29</p>
+               <p class="textJ">Because a lot of work i couldn't sit to make a breakthrough, but here we are! the algorith works with 4 numbers:</p>
+               <p class="textJ">how this works, take the number and a divisor, and starts to subtract this "divisor" from the number while the result of this operation be greater than the divisor. when this condition is broken means two things, or:<br>we reach the same number as the divisor. Thus, the number is multiple of the divisor, then isn't prime.<br>The result of the subtraction is less than the divisor. implies that the number isn't generated with this divisor, and is necessary to test with another. IF all the possible numbers is tested (from divisor to maxDivisory, see the table below) and all result is the same (the substract is less than divisor), the number is prime.
+               </p>
+               <br>
+               <div id="divTable" align="center">
+                  <table style="width:90%">
+                     <tbody>
+                        <tr>
+                           <th>Name</th><th>Example</th><th>Use</th>
+                        </tr>
+                        <tr>
+                           <td>Target</td><td>1 111 111 (127)</td><td>this is the number to analyze, we have to determine if is prime or not.</td>
+                        </tr>
+                        <tr>
+                           <td>MaxDivisory</td><td>111 111 (63)</td><td>from the previous post, is determined that the maximum divisor is at last a third of the number, but! by the moment, only can be generate a "half" easily by removing a "1". so, 127 the max divisory is 63, for 7 have 3, 31 to 63</td>
+                        </tr>
+                        <tr>
+                           <td>divisor</td><td>11 (3)</td><td>we only work with odd numbers, so, starts from 3 increasing up to the max divisor.</td>
+                        </tr>
+                        <tr>
+                           <td>two</td><td>10 (2)</td><td>to increase the divisor from odd to odd, is necessary to "jump" a even, so, increase from 2 to 2.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <br>
+               <p class="textJ"> A few considerations: <br>for the number 127, starting from 3, we have to test 31 possible divisors (increasing 2 to 2 to get 63), but none number that finish in 5 can be a prime (in decimal base is easily detectable), but by the moment the algorithm can't determinate a number finished in 5. so from this 31 possibilities, 6 finished in 5, and 10 are multiples of 3, so, from 31 number at least 16 test are a waste of time.<br>The nexts advances will be focused in increase the efficiency. so, reduce the list of possible numbers to analyse. (less numbers, better times)</p>
+               <p class="textJ">by the moment, the code in the repo, only can calculate up to 2^28, i don't know why but eats a lot of ram!!, if don't put the algorithm to work i can generate even bigger numbers (thousands of "1"), <b>but by the moment i can't figure out the problem.</b></p>
+            </div>
+            <!--         -->
+            <div>
+               <p id=date>Date: 2017-06-04 (in the evening)</p>
+               <p class="textJ">Basic Operation! for the moment can do binary sums, how this help for the finder? if exist a number P, that increment in 2 in 2(determinate in the latter post), like 3, 5, 7, 9, 11, is simple, create a binary "10" and add over and over again, this help to generate the posible divisors of the Mersenne Number. <br> a little of theory, for a binary sum, you have to consider 3 elements, the two elements to sum and a carry element (for the previous element). with this simple rule.</p>
+               <div id="divTable" align="center">
+                  <table style="width:20%">
+                     <tbody>
+                        <th colspan='4'>With: A+B=R (C for carry)</th>
+                        <tr>
+                           <th>A</th><th>B</th><th>R</th><th>C</th>
+                        </tr>
+                        <tr>
+                           <td>1</td><td>1</td><td>0</td><td>1</td>
+                        </tr>
+                        <tr>
+                           <td>1</td><td>0</td><td>1</td><td>0</td>
+                        </tr>
+                        <tr>
+                           <td>0</td><td>1</td><td>1</td><td>0</td>
+                        </tr>
+                        <tr>
+                           <td>0</td><td>0</td><td>0</td><td>0</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <p> in code, this "algorithm" is: (al least, my interpretation, with, obvious, the structure that i work, is in the repo and in the first post)</p>
+               </div>
+               <div id="divTable" align="center">
+                  <table style="width:80%">
+                     <tbody>
+                        <th colspan='2'>Code:</th>
+                        <tr><td>1</td><td>//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter</td></tr>
+                        <tr><td>2</td><td>void addBinaryChain(binaryChain *target, binaryChain *toSum){</td></tr>
+                        <tr><td>3</td><td><tab1>binaryLink *a = target->last, *b = toSum->last;</tab1></td></tr>
+                        <tr><td>4</td><td><tab1>bool carry = false; //true and true is false, and carry true to the nex one, 1+1=10</tab1></td></tr>
+                        <tr><td>5</td><td><tab1>while((a!=NULL || b!=NULL) || carry){</tab1></td></tr>
+                        <tr><td>6</td><td><tab2>if(carry){//Two cases possible with carry, the link where the sum goes exists or does not</tab2></td></tr>
+                        <tr><td>7</td><td><tab3>if(a!=NULL){ //if A exist, are two posibilites, A have a False or True</tab3></td></tr>
+                        <tr><td>8</td><td><tab4>if(a->value)</tab4></td></tr>
+                        <tr><td>9</td><td><tab5>a->value=false;</tab5></td></tr>
+                        <tr><td>10</td><td><tab4>else{</tab4></td></tr>
+                        <tr><td>11</td><td><tab5>a->value=true;</tab5></td></tr>
+                        <tr><td>12</td><td><tab5>carry=false;</tab5></td></tr>
+                        <tr><td>13</td><td><tab4>}</tab4></td></tr>
+                        <tr><td>14</td><td><tab3>}</tab3></td></tr>
+                        <tr><td>15</td><td><tab3>else{ // comes here if a not exist and whe have a carry.</tab3></td></tr>
+                        <tr><td>16</td><td><tab4>addToTheLeft(target,true);</tab4></td></tr>
+                        <tr><td>17</td><td><tab4>carry=false;</tab4></td></tr>
+                        <tr><td>18</td><td><tab3>}</tab3></td></tr>
+                        <tr><td>19</td><td><tab2>}</tab2></td></tr>
+                        <tr><td>20</td><td><tab2>if(b!=NULL && a!=NULL){</tab2></td></tr>
+                        <tr><td>21</td><td><tab3>if(a->value && b->value){</tab3></td></tr>
+                        <tr><td>22</td><td><tab4>a->value = false;</tab4></td></tr>
+                        <tr><td>23</td><td><tab4>carry = true;</tab4></td></tr>
+                        <tr><td>24</td><td><tab3>}</tab3></td></tr>
+                        <tr><td>25</td><td><tab3>else if(a->value || b->value){</tab3></td></tr>
+                        <tr><td>26</td><td><tab4>a->value = true;</tab4></td></tr>
+                        <tr><td>27</td><td><tab3>}</tab3></td></tr>
+                        <tr><td>28</td><td><tab2>}</tab2></td></tr>
+                        <tr><td>29</td><td><tab2>if(a!=NULL)</tab2></td></tr>
+                        <tr><td>30</td><td><tab3>a=a->next;</tab3></td></tr>
+                        <tr><td>31</td><td><tab2>if(b!=NULL)</tab2></td></tr>
+                        <tr><td>32</td><td><tab3>b=b->next;</tab3></td></tr>
+                        <tr><td>33</td><td><tab1>}</tab1></td></tr>
+                        <tr><td>34</td><td>}</td></tr>
+                     </tbody>
+                  </table>
+               </div>
+               <br>
+            </div>
+            <!--         -->
+            <div>
+               <p id=date>Date: 2017-06-04</p>
+               <p class="textJ">Ok, since the last entrance, we have the ability to generate the number to analyze; but we need the ability to generate the possible divisors of that number.
+                  A few considerations:<br>
+                  As you can se, every mersenne number is odd (because is formula 2<sup>n</sup> - 1), implies, that every possible divisor has to be odd to (try to divide an odd number with a even number will always be inexact).<br>
+                  so, in conclusion, we generate mersenne number with: 2<sup>n</sup> - 1 <br>
+                  and analize with number generate with: 2m-1 with this number less than less than an one third of the number to analize. <br>
+                  if P is the prime to analyze. from 3 to M the maximum number possible that could be divisor is: P/3.
+                  so, from 3, going up 2 in 2 to M, is needed:</p>
+               <p>
+                  2<sup>n</sup>-1=3(2m-1)<br>
+                  2<sup>n</sup>-1=6m-3<br>
+                  2<sup>n</sup>+2=6m<br>
+                  m=(2<sup>n</sup>+2)/6<br>
+               </p>
+               <p class="textJ">
+                  in conclusion, why this was necessary? with this calculation, is possible to determine the amount of number than is necessary to try as divisor.
+                  in a cicle of M times, testing from "i=2" to M, with the formula 2i-1, all that number is necesary to test as divisor.<br>
+                  This amount is extremly far reduced than test all the posible numbers betwen 2 to P.<br>
+                  the problem here (really thinking out loud), is calculate that formula in binary. Still remains to do the basic operations/functions in binary.<br>
+               </p>
+            </div>
+            <!--         -->
+            <div>
+               <p id=date>Date: 2017-06-01</p>
+               <p class="textJ">added two more functions in the repo, that allows to add a binary state (bool true/false) to the extremes of a chain, why this function is necessary? allows to create more faster a mersenne number.(and then evaluate if is prime)</p>
+
+               <div id="divTable" align="center">
+                  <table style="width:15%">
+                     <tbody>
+                        <tr>
+                           <th>Number</th>
+                           <th>Binary</th>
+                        </tr>
+                        <tr><td>1</td><td>0000001</td></tr>
+                        <tr><td>3</td><td>0000011</td></tr>
+                        <tr><td>7</td><td>0000111</td></tr>
+                        <tr><td>15</td><td>0001111</td></tr>
+                        <tr><td>31</td><td>0011111</td></tr>
+                        <tr><td>63</td><td>0111111</td></tr>
+                        <tr><td>127</td><td>1111111</td></tr>
+                     </tbody>
+                  </table>
+               </div>
+               <p class="textJ">in order to generate the 127 form a decimal base, is necessary calculate 2 <sup> 7</sup> - 1 (an exponential calculation) or realize a "for" cycle multiplying for 2 each lap. in bigger numbers this could be really slow process.<br>To generate 127 in binary form, i just need to add seven 1 (seven true boolean states) side to side(preferely from left to right).</p>
+            </div>
+            <!--         -->
+            <div>
+               <p id="date"><i>Date: 2017-05-31</i></p>
+               <p class="textJ">by the moment, the function to create and add "plus one" already been made, to do all the rest of operation. and by the moment nothing of the algorithm of search.</p>
+
+               <div id="divTable" align="center">
+                  <table style="width:25%">
+                     <tbody>
+                        <tr>
+                           <th>code</th>
+                        </tr>
+                        <tr><td>using namespace std;</td></tr>
+                        <tr><td>struct binaryLink{</td></tr>
+                        <tr><td><tab1>bool value;</tab1></td></tr>
+                        <tr><td><tab1>binaryLink *next; // to the left,</tab1></td></tr>
+                        <tr><td><tab1>binaryLink *prev; // to the right;</tab1></td></tr>
+                        <tr><td>};</td></tr>
+                        <tr><td>struct binaryChain{</td></tr>
+                        <tr><td><tab1>binaryLink *first; //to the left!</tab1></td></tr>
+                        <tr><td><tab1>binaryLink *last; // to the right!</tab1></td></tr>
+                        <tr><td>};</td></tr>
+                     </tbody>
+                  </table>
+               </div>
+               <hr>
+               <p>A diagram to see this code could be: </p>
+               <img src="Structure.png" width="400" height=auto>
+               <p>This two way link allows me to move around the chain without use recursive functions (with long long recursive functions the system is compromised). <br>
+                  So, to print, just move from left to right. to add one number or sum, i move from right to left.</p>
+            </div>
+         </div>
       </div>
       <div id="footer">
          <p>Credits to: Javier Rodríguez B. / Elem3ntal Development</p>
          <a class="btn btn-default" href="http://elem3ntaldmnt.com/">My WebSite</a>
          <a class="btn btn-default" href="https://github.com/Elem3ntal" target="_blank">My GitHub</a>
-         <a class="btn btn-default" href="https://github.com/Elem3ntal" target="_blank">Repo of this project</a>
-      </div>
-      <div id="log">
-         <!--         -->
-         <div>
-            <p id=date>Date: 2017-06-29</p>
-            <p class="textJ">Because a lot of work i couldn't sit to make a breakthrough, but here we are! the algorith works with 4 numbers:</p>
-            <p class="textJ">how this works, take the number and a divisor, and starts to subtract this "divisor" from the number while the result of this operation be greater than the divisor. when this condition is broken means two things, or:<br>we reach the same number as the divisor. Thus, the number is multiple of the divisor, then isn't prime.<br>The result of the subtraction is less than the divisor. implies that the number isn't generated with this divisor, and is necessary to test with another. IF all the possible numbers is tested (from divisor to maxDivisory, see the table below) and all result is the same (the substract is less than divisor), the number is prime.
-            </p>
-            <br>
-            <div id="divTable" align="center">
-               <table style="width:90%">
-                  <tbody>
-                     <tr>
-                        <th>Name</th><th>Example</th><th>Use</th>
-                     </tr>
-                     <tr>
-                        <td>Target</td><td>1 111 111 (127)</td><td>this is the number to analyze, we have to determine if is prime or not.</td>
-                     </tr>
-                     <tr>
-                        <td>MaxDivisory</td><td>111 111 (63)</td><td>from the previous post, is determined that the maximum divisor is at last a third of the number, but! by the moment, only can be generate a "half" easily by removing a "1". so, 127 the max divisory is 63, for 7 have 3, 31 to 63</td>
-                     </tr>
-                     <tr>
-                        <td>divisor</td><td>11 (3)</td><td>we only work with odd numbers, so, starts from 3 increasing up to the max divisor.</td>
-                     </tr>
-                     <tr>
-                        <td>two</td><td>10 (2)</td><td>to increase the divisor from odd to odd, is necessary to "jump" a even, so, increase from 2 to 2.</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-            <br>
-            <p class="textJ"> A few considerations: <br>for the number 127, starting from 3, we have to test 31 possible divisors (increasing 2 to 2 to get 63), but none number that finish in 5 can be a prime (in decimal base is easily detectable), but by the moment the algorithm can't determinate a number finished in 5. so from this 31 possibilities, 6 finished in 5, and 10 are multiples of 3, so, from 31 number at least 16 test are a waste of time.<br>The nexts advances will be focused in increase the efficiency. so, reduce the list of possible numbers to analyse. (less numbers, better times)</p>
-            <p class="textJ">by the moment, the code in the repo, only can calculate up to 2^28, i don't know why but eats a lot of ram!!, if don't put the algorithm to work i can generate even bigger numbers (thousands of "1"), <b>but by the moment i can't figure out the problem.</b></p>
-         </div>
-         <!--         -->
-         <div>
-            <p id=date>Date: 2017-06-04 (in the evening)</p>
-            <p class="textJ">Basic Operation! for the moment can do binary sums, how this help for the finder? if exist a number P, that increment in 2 in 2(determinate in the latter post), like 3, 5, 7, 9, 11, is simple, create a binary "10" and add over and over again, this help to generate the posible divisors of the Mersenne Number. <br> a little of theory, for a binary sum, you have to consider 3 elements, the two elements to sum and a carry element (for the previous element). with this simple rule.</p>
-            <div id="divTable" align="center">
-               <table style="width:20%">
-                  <tbody>
-                     <th colspan='4'>With: A+B=R (C for carry)</th>
-                     <tr>
-                        <th>A</th><th>B</th><th>R</th><th>C</th>
-                     </tr>
-                     <tr>
-                        <td>1</td><td>1</td><td>0</td><td>1</td>
-                     </tr>
-                     <tr>
-                        <td>1</td><td>0</td><td>1</td><td>0</td>
-                     </tr>
-                     <tr>
-                        <td>0</td><td>1</td><td>1</td><td>0</td>
-                     </tr>
-                     <tr>
-                        <td>0</td><td>0</td><td>0</td><td>0</td>
-                     </tr>
-                  </tbody>
-               </table>
-               <p> in code, this "algorithm" is: (al least, my interpretation, with, obvious, the structure that i work, is in the repo and in the first post)</p>
-            </div>
-            <div id="divTable" align="center">
-               <table style="width:80%">
-                  <tbody>
-                     <th colspan='2'>Code:</th>
-                     <tr><td>2</td><td>//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter</td></tr>
-                     <tr><td>1</td><td>void addBinaryChain(binaryChain *target, binaryChain *toSum){</td></tr>
-                     <tr><td>3</td><td><tab1>binaryLink *a = target->last, *b = toSum->last;</tab1></td></tr>
-                     <tr><td>4</td><td><tab1>bool carry = false; //true and true is false, and carry true to the nex one, 1+1=10</tab1></td></tr>
-                     <tr><td>5</td><td><tab1>while((a!=NULL || b!=NULL) || carry){</tab1></td></tr>
-                     <tr><td>6</td><td><tab2>if(carry){//Two cases possible with carry, the link where the sum goes exists or does not</tab2></td></tr>
-                     <tr><td>7</td><td><tab3>if(a!=NULL){ //if A exist, are two posibilites, A have a False or True</tab3></td></tr>
-                     <tr><td>8</td><td><tab4>if(a->value)</tab4></td></tr>
-                     <tr><td>9</td><td><tab5>a->value=false;</tab5></td></tr>
-                     <tr><td>10</td><td><tab4>else{</tab4></td></tr>
-                     <tr><td>11</td><td><tab5>a->value=true;</tab5></td></tr>
-                     <tr><td>12</td><td><tab5>carry=false;</tab5></td></tr>
-                     <tr><td>13</td><td><tab4>}</tab4></td></tr>
-                     <tr><td>14</td><td><tab3>}</tab3></td></tr>
-                     <tr><td>15</td><td><tab3>else{ // comes here if a not exist and whe have a carry.</tab3></td></tr>
-                     <tr><td>16</td><td><tab4>addToTheLeft(target,true);</tab4></td></tr>
-                     <tr><td>17</td><td><tab4>carry=false;</tab4></td></tr>
-                     <tr><td>18</td><td><tab3>}</tab3></td></tr>
-                     <tr><td>19</td><td><tab2>}</tab2></td></tr>
-                     <tr><td>20</td><td><tab2>if(b!=NULL && a!=NULL){</tab2></td></tr>
-                     <tr><td>21</td><td><tab3>if(a->value && b->value){</tab3></td></tr>
-                     <tr><td>22</td><td><tab4>a->value = false;</tab4></td></tr>
-                     <tr><td>23</td><td><tab4>carry = true;</tab4></td></tr>
-                     <tr><td>24</td><td><tab3>}</tab3></td></tr>
-                     <tr><td>25</td><td><tab3>else if(a->value || b->value){</tab3></td></tr>
-                     <tr><td>26</td><td><tab4>a->value = true;</tab4></td></tr>
-                     <tr><td>27</td><td><tab3>}</tab3></td></tr>
-                     <tr><td>28</td><td><tab2>}</tab2></td></tr>
-                     <tr><td>29</td><td><tab2>if(a!=NULL)</tab2></td></tr>
-                     <tr><td>30</td><td><tab3>a=a->next;</tab3></td></tr>
-                     <tr><td>31</td><td><tab2>if(b!=NULL)</tab2></td></tr>
-                     <tr><td>32</td><td><tab3>b=b->next;</tab3></td></tr>
-                     <tr><td>33</td><td><tab1>}</tab1></td></tr>
-                     <tr><td>34</td><td>}</td></tr>
-                  </tbody>
-               </table>
-            </div>
-            <br>
-         </div>
-         <!--         -->
-         <div>
-            <p id=date>Date: 2017-06-04</p>
-            <p class="textJ">Ok, since the last entrance, we have the ability to generate the number to analyze; but we need the ability to generate the possible divisors of that number.
-               A few considerations:<br>
-               As you can se, every mersenne number is odd (because is formula 2<sup>n</sup> - 1), implies, that every possible divisor has to be odd to (try to divide an odd number with a even number will always be inexact).<br>
-               so, in conclusion, we generate mersenne number with: 2<sup>n</sup> - 1 <br>
-               and analize with number generate with: 2m-1 with this number less than less than an one third of the number to analize. <br>
-               if P is the prime to analyze. from 3 to M the maximum number possible that could be divisor is: P/3.
-               so, from 3, going up 2 in 2 to M, is needed:</p>
-            <p>
-               2<sup>n</sup>-1=3(2m-1)<br>
-               2<sup>n</sup>-1=6m-3<br>
-               2<sup>n</sup>+2=6m<br>
-               m=(2<sup>n</sup>+2)/6<br>
-            </p>
-            <p class="textJ">
-               in conclusion, why this was necessary? with this calculation, is possible to determine the amount of number than is necessary to try as divisor.
-               in a cicle of M times, testing from "i=2" to M, with the formula 2i-1, all that number is necesary to test as divisor.<br>
-               This amount is extremly far reduced than test all the posible numbers betwen 2 to P.<br>
-               the problem here (really thinking out loud), is calculate that formula in binary. Still remains to do the basic operations/functions in binary.<br>
-            </p>
-         </div>
-         <!--         -->
-         <div>
-            <p id=date>Date: 2017-06-01</p>
-            <p class="textJ">added two more functions in the repo, that allows to add a binary state (bool true/false) to the extremes of a chain, why this function is necessary? allows to create more faster a mersenne number.(and then evaluate if is prime)</p>
-
-            <div id="divTable" align="center">
-               <table style="width:15%">
-                  <tbody>
-                     <tr>
-                        <th>Number</th>
-                        <th>Binary</th>
-                     </tr>
-                     <tr><td>1</td><td>0000001</td></tr>
-                     <tr><td>3</td><td>0000011</td></tr>
-                     <tr><td>7</td><td>0000111</td></tr>
-                     <tr><td>15</td><td>0001111</td></tr>
-                     <tr><td>31</td><td>0011111</td></tr>
-                     <tr><td>63</td><td>0111111</td></tr>
-                     <tr><td>127</td><td>1111111</td></tr>
-                  </tbody>
-               </table>
-            </div>
-            <p class="textJ">in order to generate the 127 form a decimal base, is necessary calculate 2 <sup> 7</sup> - 1 (an exponential calculation) or realize a "for" cycle multiplying for 2 each lap. in bigger numbers this could be really slow process.<br>To generate 127 in binary form, i just need to add seven 1 (seven true boolean states) side to side(preferely from left to right).</p>
-         </div>
-         <!--         -->
-         <div>
-            <p id="date"><i>Date: 2017-05-31</i></p>
-            <p class="textJ">by the moment, the function to create and add "plus one" already been made, to do all the rest of operation. and by the moment nothing of the algorithm of search.</p>
-
-            <div id="divTable" align="center">
-               <table style="width:25%">
-                  <tbody>
-                     <tr>
-                        <th>code</th>
-                     </tr>
-                     <tr><td>using namespace std;</td></tr>
-                     <tr><td>struct binaryLink{</td></tr>
-                     <tr><td><tab1>bool value;</tab1></td></tr>
-                     <tr><td><tab1>binaryLink *next; // to the left,</tab1></td></tr>
-                     <tr><td><tab1>binaryLink *prev; // to the right;</tab1></td></tr>
-                     <tr><td>};</td></tr>
-                     <tr><td>struct binaryChain{</td></tr>
-                     <tr><td><tab1>binaryLink *first; //to the left!</tab1></td></tr>
-                     <tr><td><tab1>binaryLink *last; // to the right!</tab1></td></tr>
-                     <tr><td>};</td></tr>
-                  </tbody>
-               </table>
-            </div>
-            <hr>
-            <p>A diagram to see this code could be: </p>
-            <img src="Structure.png" width="400" height=auto>
-            <p>This two way link allows me to move around the chain without use recursive functions (with long long recursive functions the system is compromised). <br>
-               So, to print, just move from left to right. to add one number or sum, i move from right to left.</p>
-         </div>
+         <a class="btn btn-default" href="https://github.com/Elem3ntal/MersennePrimeFinder" target="_blank">Repo of this project</a>
       </div>
    </body>
-
 </html>

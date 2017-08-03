@@ -7,25 +7,22 @@ GRIS
 90$ #1A1A1A
 */
 
-{
+*{
     padding: 0px;
     margin: 0px;
 }
-
 body {
     font-family: 'Roboto', sans-serif;
     color: #1A1A1A;
     background-color: #FFFFFF;
 }
 
-div:not(#log):not(#divTable) {
-    margin-right: 3%;
-    margin-left: 3%;
-    margin-bottom: 1%;
-    margin-top: 1%;
+div:not(#log):not(#divTable):not(#footer):not(#innerBody) {
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-top: 0.5%;
     border-radius: 5px;
     border: 3px solid #CCCCCC;
-    left: 100px;
 }
 td, th {
     border: 1px solid #dddddd;
@@ -62,15 +59,58 @@ tab6 {
 }
 
 #date {
-   text-align: left;
+    text-align: left;
 }
 
 #log {
-   align-content: center;
+    align-content: center;
     text-align: center;
 }
 
 .textJ {
     padding: 10px;
     text-align : justify;
+}
+
+h2{
+    z-index: 1;
+    margin-left: 0.2%;
+    margin-right: 0.2%;
+    width: 99.6%;
+    border-radius: 5px;
+    border: 3px solid #CCCCCC;
+    position: fixed;
+    top: -18px;
+    background: white;
+}
+ul{
+    border-left: 5px dotted #CCCCCC;
+/*    border-top: 3px dotted #CCCCCC;*/
+/*    border-bottom: 3px dotted #CCCCCC;*/
+}
+ul li{
+    margin: 0 0 -7px 0;
+    list-style-type: none;
+}
+ul li p{
+    padding-left: 10px;
+    text-align : justify;
+    list-style-type: none;
+}
+#innerBody{
+    position: relative;
+    top: 4rem;
+    margin-bottom: 12rem;
+}
+#footer{
+    z-index: 1;
+    margin-left: 0.2%;
+    margin-right: 0.2%;
+    border-radius: 5px;
+    border: 3px solid #CCCCCC;
+    position: fixed;
+    width: 99.6%;
+    bottom: 0;
+    left: 0px;
+    background: white;
 }

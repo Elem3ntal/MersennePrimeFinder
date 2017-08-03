@@ -27,6 +27,7 @@ binaryChain *multiplicateBinaryChain(binaryChain* A, binaryChain* B);
 ////////////////////Functions that are being made.////////////////////
 
 ////////////////////Functions already performed.////////////////////
+//takes A and B and realize multiplication between those two generating a new binary chain
 binaryChain *multiplicateBinaryChain(binaryChain* A, binaryChain* B){
 	binaryChain *result = createChain(false);
 	binaryChain *tempMulti = createChain(false);
@@ -84,12 +85,14 @@ binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain *divisor){
 	else if(isEqual(auxDividend,divisor)){
 		addToTheRight(result,true);
 		deleteChain(auxDividend);
-		auxDividend=createChain(false);
+		//subtractBinaryChain(auxDividend,divisor);
+		//auxDividend=createChain(false);
 	}
 	else{
 		addToTheRight(result,false);
 	}
 	while(tempDividend!=NULL){
+		//cout << "dentro de la division"; printBinaryChain(result);
 		addToTheRight(auxDividend,tempDividend->value);
 		if(!isAmayor(divisor,auxDividend)){
 			addToTheRight(result,true);
@@ -98,6 +101,8 @@ binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain *divisor){
 		else if(isEqual(auxDividend,divisor)){
 			addToTheRight(result,true);
 			deleteChain(auxDividend);
+			//subtractBinaryChain(auxDividend,divisor);
+			//auxDividend=createChain(false);
 		}
 		else{
 			addToTheRight(result,false);
@@ -105,20 +110,27 @@ binaryChain *divideBinaryChain(binaryChain* dividend, binaryChain *divisor){
 		tempDividend = tempDividend->prev;
 	}
 	deleteChain(auxDividend);
-	delete tempDivisor;
+	delete auxDividend->first;
+	delete auxDividend;
 	return result;
 }
 void deleteChain(binaryChain *toDelete){
 	binaryLink *temp = toDelete->first;
-	binaryLink *last;
-	while(temp!= NULL){
+	binaryLink *last = temp;
+	while(temp->prev!= NULL){
 		last = temp;
 		temp = temp->prev;
-		last->~binaryLink();
+		delete last;
+		//last->value = NULL;
+		//last->prev = NULL;
+		//last->next = NULL;
+		//last->~binaryLink();
 	}
-	temp->~binaryLink();
-	toDelete->~binaryChain();
-	//temp -> ~binaryLink();
+	temp->prev = NULL;
+	temp->next = NULL;
+	temp->value = false;
+	toDelete->last = temp;
+	toDelete->first = toDelete->last;
 }
 bool isEqual(binaryChain *A, binaryChain *B){
 	binaryLink *targetA = A->last, *targetB = B->last;
@@ -140,9 +152,9 @@ bool isEqual(binaryChain *A, binaryChain *B){
 			return false;
 		notNUll = notNUll->next;
 	}
-	delete targetA;
-	delete targetB;
-	delete notNUll;
+	targetA = NULL;
+	targetB = NULL;
+	notNUll = NULL;
 	return true;
 }
 bool isAmayor(binaryChain *A, binaryChain *B){
@@ -166,6 +178,8 @@ bool isAmayor(binaryChain *A, binaryChain *B){
 			aMayor=true;
 		targetA=targetA->next;
 	}
+	targetA = NULL;
+	targetB = NULL;
 	return aMayor;
 }
 void subtractBinaryChain(binaryChain *target, binaryChain *toSub){
@@ -212,8 +226,8 @@ void subtractBinaryChain(binaryChain *target, binaryChain *toSub){
 	}
 	target=NULL;
 	toSub=NULL;
-	/*delete a;
-	delete b;*/
+	a=NULL;
+	b = NULL;
 }
 void addBinaryChain(binaryChain *target, binaryChain *toSum){
 	//takes A and B, and add B to A, that implies that the variable where we want to save the values always must be the first to enter
@@ -255,8 +269,8 @@ void addBinaryChain(binaryChain *target, binaryChain *toSum){
 		if(b!= NULL)
 			b = b->next;
 	}
-	delete a;
-	delete b;
+	a = NULL;
+	b = NULL;
 	carry=NULL;
 	target=NULL;
 	toSum=NULL;
@@ -345,5 +359,4 @@ void printBinaryChain(binaryChain *toPrint){ //just print... dah!
 		temp = temp->prev;
 	}
 	cout << endl;
-	delete temp;
 }
